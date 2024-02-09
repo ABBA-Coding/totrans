@@ -1,0 +1,115 @@
+.alert {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    font-size: 14px;
+    padding: 0 10px;
+    display: none;
+    pointer-events: none;
+}
+
+.alert-overlay {
+    background-color: #000000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .2;
+}
+
+.alert-item {
+    background-color: #ffffff;
+    -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    -moz-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 450px;
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    z-index: 1;
+    margin-left: auto;
+    margin-top: 10px;
+    -webkit-transform: translateX(110%);
+    -moz-transform: translateX(110%);
+    -ms-transform: translateX(110%);
+    -o-transform: translateX(110%);
+    transform: translateX(110%);
+    pointer-events: auto;
+    transition: .5s;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -o-transition: .5s;
+}
+
+.alert-icon {
+    width: 70px;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: 40px 40px;
+    -moz-background-size: 40px;
+    -o-background-size: 40px;
+    background-size: 40px;
+}
+
+.alert--warning .alert-icon {
+    background-color: #f4c22b;
+    background-image: url(../images/icons/alert/warning.svg);
+}
+
+.alert--success .alert-icon {
+    background-color: #1de9b6;
+    background-image: url(../images/icons/alert/success.svg);
+}
+
+.alert--error .alert-icon {
+    background-color: #f44236;
+    background-image: url(../images/icons/alert/error.svg);
+}
+
+.alert--info .alert-icon {
+    background-color: #3ebfea;
+    background-image: url(../images/icons/alert/info.svg);
+}
+
+.alert-caption {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin: 20px 50px 20px 20px;
+}
+
+.alert-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.alert-message {
+    line-height: 18px;
+    opacity: .6;
+}
+
+.alert-footer {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e8e8e8;
+}
+
+.alert-footer a {
+    color: #5cc4ef !important;
+    text-decoration: none !important;
+}

@@ -1,0 +1,159 @@
+.tab-caption {
+    margin-bottom: 30px;
+}
+
+.select2-results__option[aria-disabled] {
+    display: none;
+}
+
+.tab-form__info:not(.active) {
+    display: none;
+}
+
+.information-card__path.active svg path {
+    fill: var(--color-main);
+}
+
+.information-card__path:not(.active) svg path {
+    fill: #D9D9D9;
+}
+
+
+.application-card {
+    cursor: pointer;
+}
+.application-card:not(:last-child) {
+    margin-bottom: 18px;
+}
+.application-card .info-card {
+    margin-bottom: 0!important;
+}
+.application-card:not(.detail) .information-card {
+    display: none;
+}
+.application-card.detail .info-card {
+    display: none;
+}
+
+.sidebar-user__name {
+    flex: 1;
+}
+
+.application-card.status_1 .application-card__status {
+    color: var(--color-green);
+}
+
+.application-card.status_2 .application-card__status {
+    color: var(--color-grey);
+}
+
+.info-card__dark,
+.info-card__white {
+    opacity: 1;
+}
+
+.account-section form .account-section__item {
+    margin-bottom: 15px;
+}
+.account-section input {
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--color-grey);
+}
+.account-section__box:last-child {
+    margin-bottom: 0!important;
+}
+
+.registration-form__radios {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+.registration-form__radio {
+    color: var(--color-grey);
+    cursor: pointer;
+    position: relative;
+}
+
+.registration-form__radio:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+.registration-form__radio input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.registration-form__radio input:checked + span {
+    color: #000000;
+}
+
+.tab-top__link {
+    transition: .1s linear;
+}
+.tab-form__name {
+    pointer-events: none;
+}
+
+
+.modal.show {
+    bottom: 0;
+}
+
+.tab-caption {
+    margin-top: 30px;
+}
+#tabAjax {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+}
+#tabAjax::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    background-color: #FFFFFF;
+    content: "";
+    display: block;
+    pointer-events: none;
+    opacity: 0;
+    transition: .3s ease-in-out;
+    background-image: url(/frontend/loader.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 70px;
+}
+#tabAjax.loading::after {
+    opacity: 0.7;
+}
+
+.full-border {
+    border-radius: 18px!important;
+}
+
+
+/*validation errors*/
+
+select.validation-error + span .select2-selection {
+    border: 1px solid #ff9292!important;
+}
+input.validation-error {
+    border: 1px solid #ff9292!important;
+}
+
+.registration-form__type span {
+    color: #ff9292;
+}
+.registration-form .select2-container .select2-selection {
+    background-color: #ededed;
+    border-radius: 16px;
+}

@@ -1,0 +1,349 @@
+.mb-20 {
+    margin-bottom: 20px;
+}
+.mb-15 {
+    margin-bottom: 15px;
+}
+.mr-20 {
+    margin-right: 20px;
+}
+.mr-15 {
+    margin-right: 15px;
+}
+
+.filemanager-field__label {
+    margin-bottom: .5rem;
+    color: #000000;
+    cursor: default;
+}
+.filemanager-field__delete {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 3px;
+    background-image: url(../images/filemanager/delete-white.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 26px;
+    opacity: 0;
+    transition: .3s ease-in-out;
+}
+.filemanager-field__upload {
+    padding: 8px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    width: 102px;
+    height: 102px;
+    font-size: 14px;
+    background-color: #fafafa;
+    border: 1px dashed #d9d9d9;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: .2s ease;
+    transition: .2s ease;
+    margin: 0 5px 10px;
+}
+.filemanager-field__upload:hover {
+    border-color: #1890ff;
+}
+.filemanager-field__image {
+    border: 1px solid #d8d8d8;
+    padding: 5px;
+    border-radius: 4px;
+    margin: 0 5px 10px;
+    cursor: pointer;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+    width: calc(33.333% - 10px);
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
+    position: relative;
+}
+.filemanager-field__image:hover .filemanager-field__delete {
+    opacity: 1;
+}
+.filemanager-field__image.active {
+    border-color: #1890ff;
+}
+.filemanager-field__image img {
+    max-width: 100%;
+    max-height: 100px;
+    object-fit: contain;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.filemanager-field__image span {
+    text-align: center;
+    font-size: 12px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 36px;
+}
+
+.filemanager-modal input {
+    border: 1px solid #d9d9d9;
+    height: 32px;
+    padding: 4px 11px;
+    color: rgba(0,0,0,.65);
+    background-color: #FFFFFF;
+    width: 100%;
+    border-radius: 3px;
+    transition: .3s ease-in-out;
+}
+.filemanager-modal input::placeholder {
+    color: #999;
+}
+.filemanager-modal input:focus,
+.filemanager-modal input:hover {
+    border-color: #1890ff;
+}
+
+.fm-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    opacity: 0.8;
+}
+
+#filemanager-modal {
+    display: none;
+}
+
+.filemanager-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #666666;
+}
+.filemanager-modal button {
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+.filemanager-modal__overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+.filemanager-modal__wrap {
+    position: relative;
+    z-index: 2;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    width: 1000px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/*--------------------------------------------
+    FILEMANAGER MODAL HEAD
+--------------------------------------------*/
+.filemanager-modal__head {
+    border-bottom: 1px solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    position: relative;
+}
+.filemanager-modal__head::before {
+    width: 100%;
+    height: 2px;
+    background-color: #0d95e8;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    content: "";
+    opacity: 0;
+}
+.filemanager-modal__wrap.loading .filemanager-modal__head::before {
+    animation: loaderLine 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+.filemanager-modal__head button:not(:hover) {
+    opacity: 0.5;
+}
+.filemanager-modal__head button svg {
+    height: auto;
+    width: 18px;
+    display: block;
+}
+@keyframes loaderLine {
+    0% {
+        opacity: 1;
+        left: -65%;
+        right: 100%;
+    }
+    60% {
+        left: 100%;
+        right: -90%;
+    }
+    100% {
+        left: 100%;
+        right: -35%;
+    }
+}
+/*--------------------------------------------
+    FILEMANAGER MODAL FOLDERS
+--------------------------------------------*/
+.filemanager-modal__body {
+    min-height: 200px;
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.filemanager-modal__folders {
+    padding: 0 20px;
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.filemanager-modal__folders input {
+    margin-top: 50px;
+}
+.filemanager-modal__folder {
+    padding-left: 25px;
+    background: url(../images/filemanager/folder.svg) no-repeat left top;
+    background-size: 18px;
+    position: relative;
+    cursor: pointer;
+}
+.filemanager-modal__folder:not(:last-child) {
+    margin-bottom: 15px;
+}
+.filemanager-modal__folder button {
+    width: 16px;
+    height: 22px;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    background-position: center;
+    opacity: 0.3;
+}
+.filemanager-modal__folder button:hover {
+    opacity: 0.8;
+}
+.filemanager-modal__folder button:first-child {
+    background-image: url(../images/filemanager/edit.svg);
+    margin-right: 10px;
+}
+.filemanager-modal__folder button:last-child {
+    background-image: url(../images/filemanager/delete.svg);
+}
+.filemanager-modal__folder div {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+/*--------------------------------------------
+    FILEMANAGER MODAL ITEMS
+--------------------------------------------*/
+.filemanager-modal__items {
+    padding: 0 20px;
+    flex: 1;
+    border-left: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
+}
+.filemanager__grid {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-right: -5px;
+    margin-left: -5px;
+    margin-bottom: -8px;
+}
+.filemanager__grid .filemanager-field__upload {
+    width: calc(33.333% - 10px);
+    height: auto;
+}
+
+.col-md-4 .filemanager__grid .filemanager-field__upload,
+.col-md-4 .filemanager-field__image {
+    width: 100%;
+}
+
+    /*--------------------------------------------
+        FILEMANAGER MODAL RIGHT
+    --------------------------------------------*/
+.filemanager-modal__right {
+    width: 260px;
+    padding: 0 20px;
+}
+.filemanager-modal__right .filemanager-field__label {
+    font-size: 13px;
+}
+/*--------------------------------------------
+    FILEMANAGER MODAL FOOTER
+--------------------------------------------*/
+.fm-btn {
+    height: 32px;
+    line-height: 30px;
+    padding: 0 15px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    display: inline-block;
+}
+.fm-btn--default {
+    border-color: #d9d9d9;
+}
+.fm-btn--default:hover {
+    border-color: #1890ff;
+}
+.fm-btn--primary {
+    background-color: #1890ff;
+    border-color: #1890ff;
+    color: #FFFFFF;
+}
+.fm-btn--danger {
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
+    color: #fff;
+}
+.filemanager-modal__footer {
+    border-top: 1px solid #d9d9d9;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+}
+.filemanager-modal__footer > div:first-child {
+    padding-right: 30px;
+}

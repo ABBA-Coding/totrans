@@ -1,0 +1,119 @@
+.information-card {
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  &__type {
+    color: #c1c1c1;
+    font-size: 16px;
+    line-height: 150%;
+  }
+  &__value {
+    color: var(--color-main);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 150%;
+    &.--green {
+      color: var(--color-green);
+      font-size: 24px;
+    }
+  }
+  &__expectations {
+    margin-top: 24px;
+  }
+  &__list {
+    padding-left: 20px;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 1px;
+      background-image: url(../../images/icon/dashed.svg);
+      background-repeat: no-repeat;
+    }
+  }
+  &__path {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &.active {
+      .information-card__circle {
+        border-color: var(--color-main);
+        &::after {
+          background: var(--color-main);
+        }
+      }
+      .information-card__text {
+        color: var(--color-main);
+      }
+      .information-card__line {
+        background: var(--color-main);
+      }
+      .information-card__white {
+        opacity: 0;
+      }
+      .information-card__blue {
+        opacity: 1;
+      }
+    }
+  }
+  &__text {
+    color: #d9d9d9;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+  }
+  &__icon {
+    position: relative;
+    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+  }
+  &__white {
+    transition: all 0.3s ease-in-out;
+  }
+  &__blue {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+  &__line {
+    width: 20px;
+    height: 1px;
+    background: #d9d9d9;
+    margin-right: 12px;
+    transition: all 0.3s ease-in-out;
+  }
+  &__circle {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #d9d9d9;
+    border-radius: 50%;
+    margin-right: 12px;
+    transition: all 0.3s ease-in-out;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      transform: translate(-50%, -50%);
+      background: #d9d9d9;
+      border-radius: 50%;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}
