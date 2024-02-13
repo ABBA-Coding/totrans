@@ -7,6 +7,9 @@
     <form action="{{ route('admin.user.post', ['id'=>$data->id]) }}" method="post">
         <div class="modal-message">
         {!! csrf_field() !!}
+
+        <input type="hidden" name="role" value="{{ $data->role->role }}">
+            
         <!------ name ------>
             <div class="form-group">
                 <label>Имя</label>
@@ -28,14 +31,6 @@
                        {{ $isClient ? 'readonly' : ''}}
                        autocomplete="off"
                        title="">
-            </div>
-            <!------ role ------>
-            <div class="form-group">
-                <label>Роль</label>
-                <select class="form-control select2" name="role" title="">
-                    <option value="admin" {{ $data->role->role == 'admin' ? 'selected' : '' }}>Admin</option>
-{{--                    <option value="client" {{ $data->role->role == 'client' ? 'selected' : '' }}>Client</option>--}}
-                </select>
             </div>
             <!------ password ------>
             <div class="form-group">
@@ -82,8 +77,7 @@
             <div class="form-group">
                 <label>Роль</label>
                 <select class="form-control select2" name="role" title="">
-                    <option value="client">Client</option>
-                    <option value="admin">Admin</option>
+                    <option value="{{ \App\User::ROLE_MANAGER }}">Manager</option>
                 </select>
             </div>
             <!------ password ------>

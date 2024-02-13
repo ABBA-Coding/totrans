@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
+use App\Models\Application;
 use App\Models\Manager;
 use App\User;
 use Illuminate\Http\Request;
@@ -86,15 +87,15 @@ class ClientController extends Controller
             } else {
                 $request->validate([
                     'name' => 'required',
-                    'email' => 'required|email|unique:users,email',
                     'password' => 'required',
+                    'email' => 'nullable|email|unique:users,email',
                     'phone' => 'string|nullable',
                     'activity_id' => 'integer|nullable',
                     'manager_id' => 'integer|nullable',
                 ]);
 
                 $data['password'] = bcrypt($password);
-                $data['login'] = Str::random(9);
+                $data['login'] = User::generateLogin();
 
                 $user = $this->modelClass::create($data);
 
@@ -116,6 +117,10 @@ class ClientController extends Controller
     public function destroy($id)
     {
         $model = $this->modelClass::findOrFail($id);
+
+        if (Application::where('user_id', $id)->exists()) {
+            return redirect()->back()->with('error', 'Нельзя удалить. У этого пользователья есть <b>заказ</b>');
+        }
 
         $model->delete();
         return redirect()->back()->with(['success'=>'Успешно удалено']);

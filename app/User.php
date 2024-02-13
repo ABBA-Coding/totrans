@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
     const ROLE_ADMIN = 'admin';
-    const ROLE_MODERATOR = 'moderator';
+    const ROLE_MANAGER = 'manager';
     const ROLE_CLIENT = 'client';
 
     /**
@@ -70,5 +72,24 @@ class User extends Authenticatable
     public function setPhoneAttribute($value)
     {
         $this->attributes['phone']  = preg_replace('/\D+/', null, $value);
+    }
+
+    public static function getAuthRole()
+    {
+        return \Illuminate\Support\Facades\Auth::user()->role->role;
+    }
+
+    public static function generateLogin(): string
+    {
+        $prefix = 'AN-';
+        $start = 1990;
+        $generates = DB::table('generated_numbers')->count();
+        $newID = $prefix.($start+$generates);
+
+        DB::table('generated_numbers')->insert([
+            'value' => $newID
+        ]);
+
+        return $newID;
     }
 }

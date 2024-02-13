@@ -12,6 +12,7 @@
                        name="name"
                        value="{{ $data->name }}"
                        autocomplete="off"
+                       required
                        title="">
             </div>
             <!------ email ------>
@@ -108,6 +109,7 @@
                        name="name"
                        value=""
                        autocomplete="off"
+                       required
                        title="">
             </div>
             <!------ email ------>
@@ -179,6 +181,7 @@
                        name="password"
                        value=""
                        autocomplete="off"
+                       required
                        title="">
             </div>
         </div>

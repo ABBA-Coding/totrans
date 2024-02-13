@@ -13,5 +13,4 @@
 $ php artisan key:generate
 $ composer update
 $ php artisan migrate
-$ php artisan module:migrate Filemanager
 $ php artisan db:seed

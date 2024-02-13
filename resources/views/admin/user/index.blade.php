@@ -16,6 +16,7 @@
                                     <li class="breadcrumb-item"><a href="javascript:">Пользователи</a></li>
                                 </ul>
                             </div>
+                            <a href="{{ route('admin.user.form') }}" class="btn btn-primary mr-0" onclick="updateUser(event, null)">Добавить</a>
                         </div>
                     </div>
                 </div>

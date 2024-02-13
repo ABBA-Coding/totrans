@@ -10,11 +10,11 @@ return [
     'en' => "English",
 
     'menu' => [
-        'home' => 'https://totrans.uz/uz',
-        'about' => 'https://totrans.uz/uz/about',
+        'home' => 'https://totrans.uz',
+        'about' => 'https://totrans.uz/about',
         'calculator' => 'https://logistics.totrans.uz/uz/calculator',
-        'news' => 'https://totrans.uz/uz/news',
-        'contacts' => 'https://totrans.uz/uz/contacts',
+        'news' => 'https://totrans.uz/news',
+        'contacts' => 'https://totrans.uz/contacts',
     ],
 
     'Главная' => 'Bosh sahifa',

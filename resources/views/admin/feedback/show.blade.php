@@ -61,7 +61,7 @@
                                 <td>{{ $data->phone ?? '-' }}</td>
                             </tr>
                             <tr>
-                                <td>Вид карго</td>
+                                <td>Логистика</td>
                                 <td>{{ \App\Models\Application::getDeliveryTypeLabel($data->delivery_type) }}</td>
                             </tr>
                             <tr>

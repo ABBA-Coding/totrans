@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,17 @@ class AdminPanel
         $user = Auth::user();
 
         if ($user && $user->role) {
-            if (in_array(Auth::user()->role->role, ['admin', 'moderator'])) {
+            $role = $user->role->role;
+
+            if (in_array($role, ['admin', 'manager'])) {
+                if($request->method() == 'GET') {
+                    if ($role === User::ROLE_MANAGER) {
+                        if (!$request->is('admin/feedback*')) {
+                            return redirect()->route('admin.feedback.index');
+                        }
+                    }
+                }
+
                 return $next($request);
             }
         }

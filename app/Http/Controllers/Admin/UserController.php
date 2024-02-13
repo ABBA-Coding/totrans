@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $data = $this->modelClass::whereHas('role', function ($role) {
-            $role->where('role', User::ROLE_ADMIN);
+            $role->whereIn('role', [User::ROLE_ADMIN, User::ROLE_MANAGER]);
         })
             ->orderBy('created_at', 'desc')
             ->paginate(20);
@@ -48,6 +48,8 @@ class UserController extends Controller
         $data = $request->only(['name', 'email', 'password']);
         $password = $request->get('password');
 
+        $data['login'] = $request->get('email');
+
         DB::beginTransaction();
         try {
 
@@ -55,7 +57,7 @@ class UserController extends Controller
                 $request->validate([
                     'name' => 'required',
                     'email' => 'nullable|email|unique:users,email,'.$id,
-                    'role' => 'required', Rule::in(['admin', 'client']),
+                    'role' => 'required',
                 ]);
                 unset($data['name'], $data['email'], $data['password']);
                 if (!empty($password)) {
@@ -67,7 +69,7 @@ class UserController extends Controller
                 $request->validate([
                     'name' => 'required',
                     'email' => 'required|email|unique:users,email',
-                    'role' => 'required', Rule::in(['admin', 'client']),
+                    'role' => 'required',
                     'password' => 'required'
                 ]);
                 if (!empty($password)) {

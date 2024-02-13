@@ -36,10 +36,11 @@ class ProfileController extends Controller
     {
         $applications = Application::with('pointA.country', 'pointB.country', 'batch.state.parent')
             ->whereHas('batch', function ($batch) {
-                $batch->where('status', Batch::STATUS_PROCESSING);
+                $batch->whereIn('status', [Batch::STATUS_WAITING, Batch::STATUS_PROCESSING]);
             })
             ->where('user_id', Auth::id())
             ->get();
+
         $manager = Manager::with('file')->find(Auth::user()->manager_id);
         $states = State::with('children')->whereNull('parent_id')->orderBy('sort')->get();
         return view('frontend.profile-home', compact('applications', 'manager', 'states'));
@@ -161,7 +162,7 @@ class ProfileController extends Controller
         try {
             $data = $request->only(['name', 'phone', 'company_name', 'email', 'activity_id', 'manager_id']);
             $data['password'] = bcrypt($request->get('password'));
-            $data['login'] = Str::random(9);
+            $data['login'] = User::generateLogin();
 
             $user = User::create($data);
 

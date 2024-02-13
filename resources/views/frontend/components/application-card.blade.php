@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="info-card__img">
-            @if($application->batch->status == \App\Models\Application::STATUS_PROCESSING)
+            @if(in_array($application->batch->status, [\App\Models\Batch::STATUS_WAITING, \App\Models\Batch::STATUS_PROCESSING]))
             <img
                 class="info-card__dark"
                 src="/frontend/images/icon/route.svg"
@@ -93,7 +93,7 @@
                                 @php
                                     $svgContent = '';
                                     if ($innerState->file_id) {
-                                        $svgContent = file_get_contents($innerState->getFile('file', 'small'), FILE_USE_INCLUDE_PATH);
+                                        $svgContent = @file_get_contents($innerState->getFile('file', 'small'), FILE_USE_INCLUDE_PATH);
                                     }
                                 @endphp
                                 {!! $svgContent !!}

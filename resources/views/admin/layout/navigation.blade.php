@@ -17,6 +17,8 @@
                     <label>Разделы</label>
                 </li>
 
+
+                @if(\App\User::getAuthRole() === \App\User::ROLE_ADMIN)
                 <li class="nav-item">
                     <a href="{{ route('admin.countries.index') }}" class="nav-link ">
                         <span class="pcoded-micon">
@@ -100,13 +102,12 @@
 
                 <li class="nav-item">
                     <a href="{{ route('admin.feedback.index') }}" class="nav-link ">
-                        <span class="pcoded-micon">
-                            <i class="feather icon-mail"></i>
-                        </span>
+                    <span class="pcoded-micon">
+                        <i class="feather icon-mail"></i>
+                    </span>
                         <span class="pcoded-mtext">Заявки</span>
                     </a>
                 </li>
-
 
                 <li class="nav-item">
                     <a href="{{ route('admin.user.index') }}" class="nav-link ">
@@ -117,15 +118,16 @@
                     </a>
                 </li>
 
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{ route('admin.settings.edit', ['id' => 1]) }}" class="nav-link ">--}}
-{{--                        <span class="pcoded-micon">--}}
-{{--                            <i class="feather icon-settings"></i>--}}
-{{--                        </span>--}}
-{{--                        <span class="pcoded-mtext">Настройки сайта</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-
+                @else
+                    <li class="nav-item">
+                        <a href="{{ route('admin.feedback.index') }}" class="nav-link ">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-mail"></i>
+                        </span>
+                            <span class="pcoded-mtext">Заявки</span>
+                        </a>
+                    </li>
+                @endif
 
                 <li class="nav-item pcoded-menu-caption">
                     <label>Действии</label>
