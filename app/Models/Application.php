@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\ModelHelperTrait;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -23,7 +24,7 @@ class Application extends Model
 
     protected $table = 'applications';
 
-    protected $fillable = ['user_id', 'application_number', 'point_a_id', 'point_b_id', 'delivery_type', 'type', 'weight', 'volume', 'mileage', 'seats_number', 'order_date', 'arrival_date', 'additional_id', 'batch_id', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'application_number', 'price', 'point_a_id', 'point_b_id', 'delivery_type', 'type', 'weight', 'volume', 'mileage', 'seats_number', 'order_date', 'arrival_date', 'additional_id', 'batch_id', 'status', 'created_at', 'updated_at'];
 
     protected $with = ['batch'];
 
@@ -38,15 +39,15 @@ class Application extends Model
             'delivery_type' => 'integer|nullable',
             'type' => 'integer|nullable',
             'weight' => 'nullable',
+            'price' => 'string|nullable',
             'volume' => 'nullable',
             'mileage' => 'nullable',
             'seats_number' => 'nullable',
-            'order_date' => 'integer|nullable',
+            'order_date' => 'nullable',
             'arrival_date' => 'integer|nullable',
             'additional_id' => 'integer|nullable',
             'created_at' => 'datetime|nullable',
             'updated_at' => 'datetime|nullable',
-
         ];
     }
 
@@ -70,15 +71,37 @@ class Application extends Model
         return $this->belongsTo(Batch::class, 'batch_id')->withDefault();
     }
 
-//    public function setStatusAttribute($value)
-//    {
-//        $this->attributes['status'] = (int)$value;
-//        if (in_array($value, [self::STATUS_COMPLETED, self::STATUS_REJECTED])) {
-//            if(empty($this->attributes['arrival_date'])) {
-//                $this->attributes['arrival_date'] = Carbon::now()->unix();
-//            }
-//        }
-//    }
+    public function setOrderDateAttribute($value)
+    {
+        if (!empty($value)) {
+            $this->attributes['order_date'] = Carbon::createFromFormat('d.m.Y', $value)->unix();
+        } else {
+            $this->attributes['order_date'] = null;
+        }
+    }
+
+    public function getOrderDateAttribute($value)
+    {
+        if (!empty($value)) {
+            return Carbon::createFromTimestamp($this->attributes['order_date'])->format('d.m.Y');
+        }
+        return null;
+    }
+
+    public function getApplicationNumberAttribute()
+    {
+        return $this->attributes['id'];
+    }
+
+    //    public function setStatusAttribute($value)
+    //    {
+    //        $this->attributes['status'] = (int)$value;
+    //        if (in_array($value, [self::STATUS_COMPLETED, self::STATUS_REJECTED])) {
+    //            if(empty($this->attributes['arrival_date'])) {
+    //                $this->attributes['arrival_date'] = Carbon::now()->unix();
+    //            }
+    //        }
+    //    }
 
     public static function getDeliveryTypeLabel($delivery_type): string
     {

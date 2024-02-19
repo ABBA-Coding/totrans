@@ -30,7 +30,7 @@ return [
     'Транспорт' => 'Transport',
     'Детали' => 'Detail',
 
-    'Calculator Title' => 'Calculate your load quickly through the Totrans calculator! And order!',
+    'Calculator Title' => 'Calculate your load quickly through the Totrans calculator! And order! Consolidated cargo',
 
     'Назад' => 'Назад',
     'Авторизация' => 'Авторизация',
@@ -129,4 +129,5 @@ return [
     'Компания' => 'Компания',
     'Введите название компании' => 'Введите название компании',
     'Выберите менеджера' => 'Выберите менеджера',
+    'Местоположение груза' => 'Cargo location'
 ];

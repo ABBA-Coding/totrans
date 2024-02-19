@@ -43,7 +43,6 @@ class ApplicationController extends CrudController
 
         $data = $request->all();
         $data['application_number'] = Str::random(6);
-        $data['order_date'] = Carbon::now()->unix();
 
         $model = $this->modelClass::create($data);
 

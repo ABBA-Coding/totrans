@@ -9,7 +9,7 @@
                         <div class="tab-top">
                             <div class="row justify-content-between">
                                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                                    <div class="tab-top__title">{{ __('static.Calculator Title') }}</div>
+                                    <div class="tab-top__title">{!! __('static.Calculator Title') !!}</div>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-5">
                                     <ul class="tab-top__list">

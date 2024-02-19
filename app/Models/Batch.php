@@ -32,6 +32,11 @@ class Batch extends Model
         ];
     }
 
+    public function setBatchNumberAttribute($value)
+    {
+        $this->attributes['batch_number'] = str_replace('_', '', $value);
+    }
+
     public function setStatusAttribute($value)
     {
         $this->attributes['status'] = (int)$value;

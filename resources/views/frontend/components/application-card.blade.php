@@ -3,13 +3,12 @@
         <div class="info-card__box">
             <div class="info-card__top">
                 <div class="info-card__grey">{{ __('static.ID заказа') }}</div>
-                <div class="info-card__grey">{{ __('static.Статус') }}</div>
+                <div class="info-card__grey">{{ __('static.Местоположение груза') }}</div>
             </div>
             <div class="info-card__top">
                 <div class="info-card__num">#{{ $application->application_number }}</div>
-                <div class="info-card__num application-card__status">
-                    {{ $application->batch->state->parent->{'title_'.$lang} }}
-                </div>
+                <div class="info-card__num">{{ $application->order_date }}</div>
+                <div class="info-card__num application-card__status">{{ $application->batch->state->parent->{'title_'.$lang} }}</div>
             </div>
         </div>
         <div class="info-card__box">
@@ -49,7 +48,7 @@
         <div class="information-card__box">
             <div class="information-card__item">
                 <div class="information-card__type">{{ __('static.ID заказа') }}</div>
-                <div class="information-card__type">{{ __('static.Статус') }}</div>
+                <div class="information-card__type">{{ __('static.Местоположение груза') }}</div>
             </div>
             <div class="information-card__item">
                 <div class="information-card__value">#{{ $application->application_number }}</div>

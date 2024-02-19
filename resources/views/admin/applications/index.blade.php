@@ -33,7 +33,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th class="w-50p">№</th>
+                                    <th>№ заказа</th>
                                     <th>пользователь</th>
                                     <th>номер телефона</th>
                                     <th>точка А</th>
@@ -49,7 +49,7 @@
                                     @foreach($data as $key => $item)
                                         <tr>
                                             <td>
-                                                {{ ($data->currentpage()-1) * $data->perpage() + $key + 1 }}
+                                                {{ $item->application_number }}
                                             </td>
                                             <td>
                                                 {{ $item->user->name }}<br>

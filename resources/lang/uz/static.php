@@ -30,7 +30,7 @@ return [
     'Транспорт' => 'Transport',
     'Детали' => 'Tafsilotlar',
 
-    'Calculator Title' => 'Totrans kalkulyator orqali tezda yukingizni hisoblating! Va buyurtma bering!',
+    'Calculator Title' => 'Totrans kalkulyator orqali tezda yukingizni hisoblating! <br> Va buyurtma bering! Konsolidatsiyalangan yuk',
 
     'Назад' => 'Orqaga',
     'Авторизация' => 'Avtorizatsiya',
@@ -129,4 +129,5 @@ return [
     'Компания' => 'Kompaniya',
     'Введите название компании' => 'Kompaniya nomini kiriting',
     'Выберите менеджера' => 'Menejerni tanlang',
+    'Местоположение груза' => 'Yuk joylashgan manzil'
 ];

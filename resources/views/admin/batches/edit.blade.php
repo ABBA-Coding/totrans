@@ -36,6 +36,7 @@
                                        class="form-control"
                                        value="{{ old('batch_number') ?? $data->batch_number }}"
                                        autocomplete="off"
+                                       data-field-type="batch_number"
                                        title="">
                             </div>
 

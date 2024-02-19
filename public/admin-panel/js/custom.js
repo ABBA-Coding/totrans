@@ -41,6 +41,11 @@ function initInputMask() {
     if (phoneMaskInput.length > 0) {
         phoneMaskInput.inputmask("99 999 99 99");  //static mask
     }
+
+    let batchMaskInput = $('input[data-field-type="batch_number"]');
+    if (batchMaskInput.length > 0) {
+        batchMaskInput.inputmask("AA-99999999");  //static mask
+    }
 }
 
 function initDatepicker() {

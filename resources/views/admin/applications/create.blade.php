@@ -134,6 +134,30 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
+                            <!------ date ------>
+                            <div class="form-group">
+                                <label>Дата заказа</label>
+                                <input type="text"
+                                       class="form-control air-datepicker"
+                                       name="order_date"
+                                       value="{{ old('order_date') ?? '' }}"
+                                       placeholder="дата заказа"
+                                       autocomplete="off"
+                                       title="">
+                            </div>
+
+                            <!------ price ------>
+                            <div class="form-group">
+                                <label>Цена перевозки</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="price"
+                                       value="{{ old('price') ?? '' }}"
+                                       placeholder="цена перевозки"
+                                       autocomplete="off"
+                                       title="">
+                            </div>
+
                             <!------ seats_number ------>
                             <div class="form-group">
                                 <label>Количество мест</label>
@@ -156,17 +180,7 @@
                                        autocomplete="off"
                                        title="">
                             </div>
-                            <!------ weight ------>
-                            <div class="form-group">
-                                <label>Вес груза</label>
-                                <input type="text"
-                                       class="form-control"
-                                       name="weight"
-                                       value="{{ old('weight') ?? '' }}"
-                                       placeholder="кг"
-                                       autocomplete="off"
-                                       title="">
-                            </div>
+
                             <!------ volume ------>
                             <div class="form-group">
                                 <label>Обьем груза</label>
