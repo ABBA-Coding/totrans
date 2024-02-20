@@ -74,6 +74,33 @@
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </div>
 
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <!------ directions ------>
+                            <div class="form-group mb-0">
+                                <label>Что входить в тариф?</label>
+                                <select class="select2_with_search admin-form-control" name="includes[]"
+                                        title="" multiple>
+                                    @if(count($includes) > 0)
+                                        @php
+                                            if(isset($data)) {
+                                              $includeIds = $data->includes->pluck('id')->toArray();
+                                            }
+                                        @endphp
+                                        @foreach($includes as $include)
+                                            <option
+                                                value="{{ $include->id }}" {{ in_array($include->id, $includeIds) ? 'selected' : '' }}>{{ $include->title_ru }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </form>
     </div>

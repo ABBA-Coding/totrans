@@ -303,6 +303,8 @@ Route::prefix('admin/batches')->namespace('Admin')->group(function () {
         Route::get('/{id}/edit', 'BatchController@edit')->name('admin.batches.edit');
         Route::post('/{id}', 'BatchController@update')->name('admin.batches.update');
         Route::delete('/{id}', 'BatchController@destroy')->name('admin.batches.destroy');
+
+        Route::post('/{id}/transfer', 'BatchController@transfer')->name('admin.batches.transfer');
     });
 });
 /*--------------------------------------------------------------------------------

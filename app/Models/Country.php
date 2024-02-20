@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\ModelHelperTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Country extends Model
@@ -30,6 +31,11 @@ class Country extends Model
             'updated_at' => 'datetime|nullable',
 
         ];
+    }
+
+    public function includes(): BelongsToMany
+    {
+        return $this->belongsToMany(Includes::class, 'country_include','country_id','include_id');
     }
 
     public function cities(): HasMany

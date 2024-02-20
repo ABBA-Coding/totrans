@@ -72,7 +72,7 @@
                                                 {{ $item->batch->batch_number }}
                                             </td>
                                             <td>
-                                                <span class="btn-status btn-status-warning">{{ $item->batch->state->title_ru }}</span>
+                                                <span class="btn-status btn-status-warning">{{ $item->batch->state->title_ru ?? '---' }}</span>
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin.applications.edit', ['id' => $item->id]) }}"

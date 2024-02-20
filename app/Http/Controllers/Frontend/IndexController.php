@@ -91,7 +91,11 @@ class IndexController extends Controller
                         'volume' => 'required',
                         'weight' => 'required',
                     ]);
+                    $point_a_country_id = $request->get('point_a_country_id');
                     $price = $this->calculatePrice($request->all());
+                    $includes = Includes::whereHas('countries', function ($countries) use ($point_a_country_id) {
+                        return $countries->where('countries.id', $point_a_country_id);
+                    })->active()->orderBy('sort', 'ASC')->get();
                     $view = view('frontend.components.tab-detail', compact('additional_functions', 'includes','calculatorData', 'pointA', 'pointB', 'selectedActivity', 'selectedAdditionalFunction', 'price'))->render();
                     break;
                 case 'application':

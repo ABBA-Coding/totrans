@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\ModelHelperTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Includes extends Model
 {
@@ -28,5 +29,10 @@ class Includes extends Model
             'updated_at' => 'datetime|nullable',
 
         ];
+    }
+
+    public function countries(): BelongsToMany
+    {
+        return $this->belongsToMany(Country::class, 'country_include','include_id','country_id');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\CrudController;
+use App\Models\Application;
 use App\Models\Batch;
 use App\Models\State;
 use Illuminate\Http\Request;
@@ -36,6 +37,28 @@ class BatchController extends CrudController
         $data = $this->modelClass::findOrFail($id);
         $states = State::with('children')->whereNull('parent_id')->active()->get();
 
-        return view('admin.'.$this->dbName.'.edit', compact('data', 'states'));
+        $ownApplications = Application::where('batch_id', $id)->get();
+        $otherApplications = Application::whereNull('batch_id')->get();
+        return view('admin.'.$this->dbName.'.edit', compact('data', 'states', 'ownApplications', 'otherApplications'));
+    }
+
+    public function transfer($id, Request $request)
+    {
+        $ownIds = $request->get('own') ? array_keys($request->get('own')) : [];
+        $otherIds = $request->get('other') ? array_keys($request->get('other')) : [];
+
+        if (count($ownIds) > 0) {
+            Application::whereIn('id', $ownIds)->update([
+                'batch_id' => null
+            ]);
+        }
+
+        if (count($otherIds) > 0) {
+            Application::whereIn('id', $otherIds)->update([
+                'batch_id' => $id
+            ]);
+        }
+
+        return redirect()->back()->with(['success'=>'Успешно сохранено']);
     }
 }
