@@ -31,11 +31,11 @@ class Application extends Model
     public static function rules()
     {
         return [
-            'batch_id' => 'integer|required',
+            'batch_id' => 'integer|nullable',
             'user_id' => 'integer|nullable',
             'application_number' => 'integer|nullable',
-            'point_a_id' => 'integer|nullable',
-            'point_b_id' => 'integer|nullable',
+            'point_a_id' => 'integer|required',
+            'point_b_id' => 'integer|required',
             'delivery_type' => 'integer|nullable',
             'type' => 'integer|nullable',
             'weight' => 'nullable',

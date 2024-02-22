@@ -100,7 +100,7 @@
                             </div>
 
                             <!------ activities ------>
-                            <div class="form-group">
+                            <div class="form-group mb-0">
                                 <label>Сфера деятельности</label>
                                 <select class="select2_with_search admin-form-control" name="activity_id"
                                         title="">
@@ -108,20 +108,6 @@
                                     @foreach($activities as $activity)
                                         <option value="{{ $activity->id }}">
                                             {{ $activity->title_ru }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!------ batch_id ------>
-                            <div class="form-group mb-0">
-                                <label>Партия</label>
-                                <select class="select2_with_search admin-form-control" name="batch_id"
-                                        title="">
-                                    <option value=""></option>
-                                    @foreach($batches as $batch)
-                                        <option value="{{ $batch->id }}" {{ $batch->status !== \App\Models\Batch::STATUS_WAITING ? 'disabled' : '' }}>
-                                            {{ $batch->batch_number }}
                                         </option>
                                     @endforeach
                                 </select>

@@ -100,7 +100,7 @@
                             </div>
 
                             <!------ activities ------>
-                            <div class="form-group">
+                            <div class="form-group {{ empty($data->batch_id) ? 'mb-0' : '' }}">
                                 <label>Сфера деятельности</label>
                                 <select class="select2_with_search admin-form-control" disabled name="activity_id"
                                         title="">
@@ -113,6 +113,7 @@
                                 </select>
                             </div>
 
+                            @if(!empty($data->batch_id))
                             <!------ batch_id ------>
                             <div class="form-group mb-0">
                                 <label>Партия</label>
@@ -126,7 +127,7 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            @endif
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
