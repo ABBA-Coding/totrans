@@ -166,9 +166,20 @@
                                        autocomplete="off"
                                        title="">
                             </div>
+                            <!------ weight ------>
+                            <div class="form-group">
+                                <label>Вес груза</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="weight"
+                                       value="{{ old('weight') ?? '' }}"
+                                       placeholder="кг"
+                                       autocomplete="off"
+                                       title="">
+                            </div>
 
                             <!------ volume ------>
-                            <div class="form-group">
+                            <div class="form-group mb-0">
                                 <label>Обьем груза</label>
                                 <input type="text"
                                        class="form-control"

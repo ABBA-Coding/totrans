@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\App;
 
 class IndexController extends Controller
 {
-    const TRANSPORT_VOLUME = 110;
-    const TRANSPORT_WEIGHT = 25000;
-
     public function __construct(Request $request)
     {
         if ($request->method() == 'GET') {
@@ -129,8 +126,8 @@ class IndexController extends Controller
         $city = City::findOrFail($data['point_a_id']);
         $transport_price = $city->transport_price ?? 0;
 
-        $priceByVolume = ($transport_price / self::TRANSPORT_VOLUME) * $data['volume'];
-        $priceByWeight = ($transport_price / self::TRANSPORT_WEIGHT) * $data['weight'];
+        $priceByVolume = ($transport_price / Feedback::TRANSPORT_VOLUME) * $data['volume'];
+        $priceByWeight = ($transport_price / Feedback::TRANSPORT_WEIGHT) * $data['weight'];
 
         return $priceByVolume > $priceByWeight ? $priceByVolume : $priceByWeight;
     }

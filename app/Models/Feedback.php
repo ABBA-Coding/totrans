@@ -13,6 +13,9 @@ class Feedback extends Model
     const TYPE_FEEDBACK = 1;
     const TYPE_PAYMENT = 2;
 
+    const TRANSPORT_VOLUME = 110;
+    const TRANSPORT_WEIGHT = 25000;
+
     protected $table = 'feedback';
 
     protected $fillable = ['name', 'phone', 'email', 'message', 'type', 'status', 'created_at', 'updated_at',
@@ -51,6 +54,17 @@ class Feedback extends Model
     public function additional(): BelongsTo
     {
         return $this->belongsTo(AdditionalFunction::class, 'additional_id');
+    }
+
+    public static function calculatePrice($feedback)
+    {
+        $city = City::findOrFail($feedback->point_a_id);
+        $transport_price = $city->transport_price ?? 0;
+
+        $priceByVolume = ($transport_price / self::TRANSPORT_VOLUME) * $feedback->volume;
+        $priceByWeight = ($transport_price / self::TRANSPORT_WEIGHT) * $feedback->weight;
+
+        return $priceByVolume > $priceByWeight ? $priceByVolume : $priceByWeight;
     }
 
     // attributes

@@ -92,6 +92,12 @@
                                 <td>Дата создание</td>
                                 <td>{{ $data->created_at->format('d.m.Y / H:i:s') }}</td>
                             </tr>
+                            @if($data->delivery_type == \App\Models\Application::DELIVERY_TYPE_AUTO)
+                            <tr>
+                                <td>Цена</td>
+                                <td style="font-size: 16px;font-weight: 600">@priceFormat(round(\App\Models\Feedback::calculatePrice($data)))$</td>
+                            </tr>
+                            @endif
                             </tbody>
                         </table>
                     </div>
