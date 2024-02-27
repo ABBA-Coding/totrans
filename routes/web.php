@@ -101,6 +101,7 @@ Route::namespace('Admin')
             Route::get('users/', 'UserController@index')->name('user.index');
             Route::get('users/form/{id?}', 'UserController@form')->name('user.form');
             Route::post('users/form/{id?}', 'UserController@post')->name('user.post');
+            Route::delete('users/{id}', 'UserController@destroy')->name('user.destroy');
         });
     });
 

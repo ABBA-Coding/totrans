@@ -21,14 +21,24 @@ class AdminPanel
 
         if ($user && $user->role) {
             $role = $user->role->role;
+            $unauthorized = false;
 
-            if (in_array($role, ['admin', 'manager'])) {
+            if (in_array($role, [User::ROLE_ADMIN, User::ROLE_LOGIST, User::ROLE_SALES])) {
                 if($request->method() == 'GET') {
-                    if ($role === User::ROLE_MANAGER) {
-                        if (!$request->is('admin/feedback*')) {
-                            return redirect()->route('admin.feedback.index');
+
+                    if ($role === User::ROLE_LOGIST) {
+                        if (!$request->is('admin/feedback*') && !$request->is('admin/clients*') && !$request->is('admin/applications*') && !$request->is('admin/batches*')) {
+                           $unauthorized = true;
+                        }
+                    } elseif ($role === User::ROLE_SALES) {
+                        if (!$request->is('admin/feedback*') && !$request->is('admin/clients*') && !$request->is('admin/applications*')) {
+                            $unauthorized = true;
                         }
                     }
+                }
+
+                if ($unauthorized) {
+                    return redirect()->route('admin.feedback.index');
                 }
 
                 return $next($request);

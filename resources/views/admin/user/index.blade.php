@@ -40,7 +40,7 @@
                                     <th>email</th>
                                     <th>роль</th>
                                     <th>дата регистрации</th>
-                                    <th class="w-100p">действие</th>
+                                    <th class="w-200p">действие</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -65,7 +65,13 @@
                                             <td>
                                                 <a href="javascript:"
                                                    onclick="updateUser(event, {{ $item->id }})"
-                                                   class="label theme-bg text-white f-12 w-100 mb-0">Изменить
+                                                   class="label theme-bg text-white f-12 mb-0">Изменить
+                                                </a>
+                                                <a
+                                                    href="{{ route('admin.user.destroy', ['id' => $item->id]) }}"
+                                                    onclick="confirmDelete(event,this.getAttribute('href'))"
+                                                    class="label theme-bg2 text-white f-12 mb-0">
+                                                    Удалить
                                                 </a>
                                             </td>
                                         </tr>

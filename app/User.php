@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
     const ROLE_ADMIN = 'admin';
-    const ROLE_MANAGER = 'manager';
+    const ROLE_LOGIST = 'logist';
+    const ROLE_SALES = 'sales';
     const ROLE_CLIENT = 'client';
 
     /**

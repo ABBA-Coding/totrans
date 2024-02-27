@@ -9,7 +9,7 @@
         {!! csrf_field() !!}
 
         <input type="hidden" name="role" value="{{ $data->role->role }}">
-            
+
         <!------ name ------>
             <div class="form-group">
                 <label>Имя</label>
@@ -32,6 +32,16 @@
                        autocomplete="off"
                        title="">
             </div>
+            @if($data->role->role !== \App\User::ROLE_ADMIN)
+            <!------ role ------>
+            <div class="form-group">
+                <label>Роль</label>
+                <select class="form-control select2" name="role" title="">
+                    <option value="{{ \App\User::ROLE_LOGIST }}" {{ $data->role->role == \App\User::ROLE_LOGIST ? 'selected' : '' }}>Logist</option>
+                    <option value="{{ \App\User::ROLE_SALES }}" {{ $data->role->role == \App\User::ROLE_SALES ? 'selected' : '' }}>Sales Manager</option>
+                </select>
+            </div>
+            @endif
             <!------ password ------>
             <div class="form-group">
                 <label>Пароль (если не нужно менять пароль, тогда оставляйте это поле пустым)</label>
@@ -77,7 +87,8 @@
             <div class="form-group">
                 <label>Роль</label>
                 <select class="form-control select2" name="role" title="">
-                    <option value="{{ \App\User::ROLE_MANAGER }}">Manager</option>
+                    <option value="{{ \App\User::ROLE_LOGIST }}">Logist</option>
+                    <option value="{{ \App\User::ROLE_SALES }}">Sales Manager</option>
                 </select>
             </div>
             <!------ password ------>

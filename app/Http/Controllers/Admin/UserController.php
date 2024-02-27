@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $data = $this->modelClass::whereHas('role', function ($role) {
-            $role->whereIn('role', [User::ROLE_ADMIN, User::ROLE_MANAGER]);
+            $role->whereIn('role', [User::ROLE_ADMIN, User::ROLE_LOGIST, User::ROLE_SALES]);
         })
             ->orderBy('created_at', 'desc')
             ->paginate(20);
@@ -45,10 +45,10 @@ class UserController extends Controller
 
     public function post(Request $request, $id = null)
     {
-        $data = $request->only(['name', 'email', 'password']);
-        $password = $request->get('password');
+        $data = $request->only(['name', 'email']);
 
-        $data['login'] = $request->get('email');
+        $password = $request->get('password');
+        $data['login'] = Str::random(15);
 
         DB::beginTransaction();
         try {
@@ -59,11 +59,13 @@ class UserController extends Controller
                     'email' => 'nullable|email|unique:users,email,'.$id,
                     'role' => 'required',
                 ]);
-                unset($data['name'], $data['email'], $data['password']);
+
                 if (!empty($password)) {
                     $data['password'] = bcrypt($password);
                 }
+
                 $user = $this->modelClass::findOrFail($id);
+
                 $user->update($data);
             } else {
                 $request->validate([
@@ -72,9 +74,11 @@ class UserController extends Controller
                     'role' => 'required',
                     'password' => 'required'
                 ]);
+
                 if (!empty($password)) {
                     $data['password'] = bcrypt($password);
                 }
+
                 $user = $this->modelClass::create($data);
             }
 
