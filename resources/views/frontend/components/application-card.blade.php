@@ -57,23 +57,15 @@
                 </div>
             </div>
         </div>
-        <div class="information-card__box">
-            <div class="information-card__item">
-                <div class="information-card__type">{{ __('static.Количество мест') }}</div>
-            </div>
-            <div class="information-card__item">
-                <div class="information-card__value">{{ $application->seats_number ?? 1 }}</div>
-            </div>
-        </div>
 
         <div class="information-card__box">
             <div class="information-card__item">
-                <div class="information-card__type">{{ __('static.Километраж') }}</div>
+                <div class="information-card__type">{{ __('static.Количество мест') }}</div>
                 <div class="information-card__type">{{ __('static.Вес груза') }}</div>
                 <div class="information-card__type">{{ __('static.Маршрут') }}</div>
             </div>
             <div class="information-card__item">
-                <div class="information-card__value">{{ $application->mileage }} {{ __('static.км') }}</div>
+                <div class="information-card__value">{{ $application->seats_number ?? 1 }}</div>
                 <div class="information-card__value">{{ $application->weight }} {{ __('static.кг') }}</div>
                 <div class="information-card__value">
                     {{ mb_substr($application->pointA->country->{'name_'.$lang}, 0,3) }} - {{ mb_substr($application->pointB->country->{'name_'.$lang}, 0,3) }}

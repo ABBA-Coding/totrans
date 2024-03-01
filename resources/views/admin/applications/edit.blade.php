@@ -170,12 +170,12 @@
                             </div>
                             <!------ mileage ------>
                             <div class="form-group">
-                                <label>Километраж</label>
+                                <label>Количество </label>
                                 <input type="text"
                                        class="form-control"
                                        name="mileage"
                                        value="{{ old('mileage') ?? $data->mileage }}"
-                                       placeholder="км"
+                                       placeholder=""
                                        autocomplete="off"
                                        title="">
                             </div>
