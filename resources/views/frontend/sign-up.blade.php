@@ -54,24 +54,26 @@
                                 </div>
 
                                 <div class="registration-form__box">
-                                    <div class="registration-form__type">{{ __('static.E-mail') }}</div>
+                                    <div class="registration-form__type">{{ __('static.E-mail') }}<span>*</span></div>
                                     <input
                                         name="email"
                                         type="email"
                                         class="registration-form__input"
                                         placeholder="{{ __('static.Введите email') }}"
                                         autocomplete="off"
+                                        required
                                     />
                                 </div>
 
                                 <div class="registration-form__box mb-30">
-                                    <div class="registration-form__type">{{ __('static.Компания') }}</div>
+                                    <div class="registration-form__type">{{ __('static.Компания') }}<span>*</span></div>
                                     <input
                                         name="company_name"
                                         type="text"
                                         class="registration-form__input"
                                         placeholder="{{ __('static.Введите название компании') }}"
                                         autocomplete="off"
+                                        required
                                     />
                                 </div>
 

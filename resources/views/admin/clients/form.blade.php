@@ -4,55 +4,70 @@
     <form action="{{ route('admin.clients.post', ['id'=>$data->id]) }}" method="post">
         <div class="modal-message">
         {!! csrf_field() !!}
-        <!------ name ------>
-            <div class="form-group">
-                <label>Имя</label>
-                <input type="text"
-                       class="form-control"
-                       name="name"
-                       value="{{ $data->name }}"
-                       autocomplete="off"
-                       required
-                       title="">
-            </div>
-            <!------ email ------>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text"
-                       class="form-control"
-                       name="email"
-                       value="{{ $data->email }}"
-                       autocomplete="off"
-                       title="">
+
+            <div class="row">
+                <div class="col-6">
+                    <!------ name ------>
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text"
+                               class="form-control"
+                               name="name"
+                               value="{{ $data->name }}"
+                               autocomplete="off"
+                               required
+                               title="">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <!------ email ------>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text"
+                               class="form-control"
+                               name="email"
+                               value="{{ $data->email }}"
+                               autocomplete="off"
+                               required
+                               title="">
+                    </div>
+                </div>
             </div>
 
-            <!------ phone ------>
-            <div class="form-group">
-                <label>Номер телефона</label>
-                <input type="text"
-                       class="form-control"
-                       name="phone"
-                       value="{{ $data->phone }}"
-                       autocomplete="off"
-                       data-field-type="phone"
-                       title="">
-            </div>
-
-            <!------ company_name ------>
-            <div class="form-group">
-                <label>Наименование компании</label>
-                <input type="text"
-                       class="form-control"
-                       name="company_name"
-                       value="{{ $data->company_name }}"
-                       autocomplete="off"
-                       title="">
+            <div class="row">
+                <div class="col-6">
+                    <!------ phone ------>
+                    <div class="form-group">
+                        <label>Номер телефона</label>
+                        <input type="text"
+                               class="form-control"
+                               name="phone"
+                               value="{{ $data->phone }}"
+                               autocomplete="off"
+                               data-field-type="phone"
+                               required
+                               title="">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <!------ company_name ------>
+                    <div class="form-group">
+                        <label>Наименование компании</label>
+                        <input type="text"
+                               class="form-control"
+                               name="company_name"
+                               value="{{ $data->company_name }}"
+                               autocomplete="off"
+                               required
+                               title="">
+                    </div>
+                </div>
             </div>
 
             <!------ activities ------>
             <div class="form-group">
                 <label>Сфера деятельности</label>
-                <select class="select2_with_search admin-form-control" name="activity_id"
+                <select required class="select2_with_search admin-form-control" name="activity_id"
                         title="">
                     <option value=""></option>
                     @foreach($activities as $activity)
@@ -66,12 +81,26 @@
             <!------ managers ------>
             <div class="form-group">
                 <label>Менеджер</label>
-                <select class="select2_with_search admin-form-control" name="manager_id"
+                <select required class="select2_with_search admin-form-control" name="manager_id"
                         title="">
                     <option value=""></option>
                     @foreach($managers as $manager)
                         <option value="{{ $manager->id }}" {{ $manager->id == $data->manager_id ? 'selected' : '' }}>
                             {{ $manager->name_ru }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!------ district ------>
+            <div class="form-group">
+                <label>Регион</label>
+                <select required class="select2_with_search admin-form-control" name="district_id"
+                        title="">
+                    <option value=""></option>
+                    @foreach($districts as $district)
+                        <option value="{{ $district->id }}" {{ $district->id == $data->district_id ? 'selected' : '' }}>
+                            {{ $district->name_ru }}
                         </option>
                     @endforeach
                 </select>
@@ -101,54 +130,71 @@
             <!------ role ------>
             <input type="hidden" name="role" value="{{ \App\User::ROLE_CLIENT }}">
 
-            <!------ name ------>
-            <div class="form-group">
-                <label>Имя</label>
-                <input type="text"
-                       class="form-control"
-                       name="name"
-                       value=""
-                       autocomplete="off"
-                       required
-                       title="">
-            </div>
-            <!------ email ------>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text"
-                       class="form-control"
-                       name="email"
-                       value=""
-                       autocomplete="off"
-                       title="">
-            </div>
-            <!------ phone ------>
-            <div class="form-group">
-                <label>Номер телефона</label>
-                <input type="text"
-                       class="form-control"
-                       name="phone"
-                       value=""
-                       autocomplete="off"
-                       data-field-type="phone"
-                       title="">
+            <div class="row">
+                <div class="col-6">
+                    <!------ name ------>
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text"
+                               class="form-control"
+                               name="name"
+                               value=""
+                               autocomplete="off"
+                               required
+                               title="">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <!------ email ------>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text"
+                               class="form-control"
+                               name="email"
+                               value=""
+                               autocomplete="off"
+                               required
+                               title="">
+                    </div>
+                </div>
             </div>
 
-            <!------ company_name ------>
-            <div class="form-group">
-                <label>Наименование компании</label>
-                <input type="text"
-                       class="form-control"
-                       name="company_name"
-                       value=""
-                       autocomplete="off"
-                       title="">
+            <div class="row">
+                <div class="col-6">
+                    <!------ phone ------>
+                    <div class="form-group">
+                        <label>Номер телефона</label>
+                        <input type="text"
+                               class="form-control"
+                               name="phone"
+                               value=""
+                               autocomplete="off"
+                               data-field-type="phone"
+                               required
+                               title="">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <!------ company_name ------>
+                    <div class="form-group">
+                        <label>Наименование компании</label>
+                        <input type="text"
+                               class="form-control"
+                               name="company_name"
+                               value=""
+                               autocomplete="off"
+                               required
+                               title="">
+                    </div>
+                </div>
             </div>
+
 
             <!------ activities ------>
             <div class="form-group">
                 <label>Сфера деятельности</label>
-                <select class="select2_with_search admin-form-control" name="activity_id"
+                <select required class="select2_with_search admin-form-control" name="activity_id"
                         title="">
                     <option value=""></option>
                     @foreach($activities as $activity)
@@ -162,12 +208,26 @@
             <!------ managers ------>
             <div class="form-group">
                 <label>Менеджер</label>
-                <select class="select2_with_search admin-form-control" name="manager_id"
+                <select required class="select2_with_search admin-form-control" name="manager_id"
                         title="">
                     <option value=""></option>
                     @foreach($managers as $manager)
                         <option value="{{ $manager->id }}">
                             {{ $manager->name_ru }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!------ district ------>
+            <div class="form-group">
+                <label>Регион</label>
+                <select required class="select2_with_search admin-form-control" name="district_id"
+                        title="">
+                    <option value=""></option>
+                    @foreach($districts as $district)
+                        <option value="{{ $district->id }}">
+                            {{ $district->name_ru }}
                         </option>
                     @endforeach
                 </select>

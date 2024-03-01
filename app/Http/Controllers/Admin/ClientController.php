@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Application;
+use App\Models\District;
 use App\Models\Manager;
 use App\User;
 use Illuminate\Http\Request;
@@ -51,7 +52,9 @@ class ClientController extends Controller
 
             $managers = Manager::all();
 
-            $view = view('admin.clients.form', compact('data', 'activities', 'managers'))->render();
+            $districts = District::all();
+
+            $view = view('admin.clients.form', compact('data', 'activities', 'managers', 'districts'))->render();
 
             return response()->json(['view'=>$view]);
         }
@@ -61,7 +64,7 @@ class ClientController extends Controller
 
     public function post(Request $request, $id = null)
     {
-        $data = $request->only(['name', 'email', 'phone', 'activity_id', 'manager_id', 'company_name']);
+        $data = $request->only(['name', 'email', 'phone', 'activity_id', 'manager_id', 'district_id', 'company_name']);
 
         $password = $request->get('password');
 
@@ -71,10 +74,11 @@ class ClientController extends Controller
 
                 $request->validate([
                     'name' => 'string|required',
-                    'email' => 'nullable|email|unique:users,email,'.$id,
-                    'phone' => 'string|nullable',
-                    'activity_id' => 'integer|nullable',
-                    'manager_id' => 'integer|nullable',
+                    'email' => 'required|email|unique:users,email,'.$id,
+                    'phone' => 'string|required',
+                    'activity_id' => 'integer|required',
+                    'manager_id' => 'integer|required',
+                    'district_id' => 'integer|required',
                 ]);
 
                 if (!empty($password)) {
@@ -88,10 +92,11 @@ class ClientController extends Controller
                 $request->validate([
                     'name' => 'required',
                     'password' => 'required',
-                    'email' => 'nullable|email|unique:users,email',
-                    'phone' => 'string|nullable',
-                    'activity_id' => 'integer|nullable',
-                    'manager_id' => 'integer|nullable',
+                    'email' => 'required|email|unique:users,email',
+                    'phone' => 'string|required',
+                    'activity_id' => 'integer|required',
+                    'manager_id' => 'integer|required',
+                    'district_id' => 'integer|required',
                 ]);
 
                 $data['password'] = bcrypt($password);

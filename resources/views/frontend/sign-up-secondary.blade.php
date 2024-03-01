@@ -34,18 +34,9 @@
                                             </option>
                                         @endforeach
                                     </select>
-
-{{--                                    <div class="registration-form__radios">--}}
-{{--                                        @foreach($activities as $activity)--}}
-{{--                                            <div class="registration-form__radio">--}}
-{{--                                                <input title="" type="radio" name="activity_id" value="{{ $activity->id }}">--}}
-{{--                                                <span>{{ $activity->{'title_'.$lang} }}</span>--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
-{{--                                    </div>--}}
                                 </div>
 
-                                <div class="registration-form__box mb-30">
+                                <div class="registration-form__box">
                                     <div class="registration-form__type">{{ __('static.Выберите менеджера') }}</div>
                                     <select required class="select2_cus" name="manager_id" title="" style="width:100%">
                                         <option value="" selected="selected">{{ __('static.Выберите менеджера') }}</option>
@@ -53,6 +44,19 @@
                                             <option value="{{ $manager->id }}"
                                                 {{ request()->get('manager_id') == $manager->id ? 'selected' : '' }}>
                                                 {{ $manager->{'name_'.$lang} }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="registration-form__box mb-30">
+                                    <div class="registration-form__type">{{ __('static.Выберите город') }}</div>
+                                    <select required class="select2_cus" name="district_id" title="" style="width:100%">
+                                        <option value="" selected="selected">{{ __('static.Выберите город') }}</option>
+                                        @foreach($districts as $district)
+                                            <option value="{{ $district->id }}"
+                                                {{ request()->get('district_id') == $district->id ? 'selected' : '' }}>
+                                                {{ $district->{'name_'.$lang} }}
                                             </option>
                                         @endforeach
                                     </select>

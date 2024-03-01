@@ -6,6 +6,7 @@ use  App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Application;
 use App\Models\Batch;
+use App\Models\District;
 use App\Models\Manager;
 use App\Models\Setting;
 use App\Models\State;
@@ -143,7 +144,8 @@ class ProfileController extends Controller
     {
         $activities = Activity::active()->get();
         $managers = Manager::get();
-        return view('frontend.sign-up-secondary', compact('activities', 'managers'));
+        $districts = District::all();
+        return view('frontend.sign-up-secondary', compact('activities', 'managers' , 'districts'));
     }
 
     public function signUpPost(Request $request)
@@ -155,12 +157,18 @@ class ProfileController extends Controller
             'email' => 'string|email|nullable|unique:users,email',
             'activity_id' => 'int|required',
             'manager_id' => 'int|required',
+            'district_id' => 'int|required',
             'password' => 'required'
         ]);
 
+        $phone = preg_replace('/\D+/', null, $request->get('phone'));
+        if (User::where('phone', $phone)->exists()) {
+            return redirect()->back()->with('error', __('static.unique_phone_message'));
+        }
+
         DB::beginTransaction();
         try {
-            $data = $request->only(['name', 'phone', 'company_name', 'email', 'activity_id', 'manager_id']);
+            $data = $request->only(['name', 'phone', 'company_name', 'email', 'activity_id', 'manager_id', 'district_id']);
             $data['password'] = bcrypt($request->get('password'));
             $data['login'] = User::generateLogin();
 

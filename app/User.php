@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Activity;
+use App\Models\District;
 use App\Models\Manager;
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,7 +28,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id', 'name', 'login', 'email', 'email_verified_at', 'password', 'phone', 'phone_verified_at', 'activity_id',
-        'manager_id', 'company_name'
+        'manager_id', 'company_name', 'district_id'
     ];
 
     /**
@@ -52,6 +53,11 @@ class User extends Authenticatable
     public function activity(): BelongsTo
     {
         return $this->belongsTo(Activity::class, 'activity_id')->withDefault();
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class, 'district_id')->withDefault();
     }
 
     public function manager(): BelongsTo

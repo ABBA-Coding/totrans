@@ -129,5 +129,7 @@ return [
     'Компания' => 'Kompaniya',
     'Введите название компании' => 'Kompaniya nomini kiriting',
     'Выберите менеджера' => 'Menejerni tanlang',
-    'Местоположение груза' => 'Yuk joylashgan manzil'
+    'Местоположение груза' => 'Yuk joylashgan manzil',
+    '$' => 'sh.b',
+    'unique_phone_message' => 'Bitta telefon raqamga faqat bitta akkaunt ochish mumkin.'
 ];

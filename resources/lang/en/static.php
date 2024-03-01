@@ -129,5 +129,7 @@ return [
     'Компания' => 'Компания',
     'Введите название компании' => 'Введите название компании',
     'Выберите менеджера' => 'Выберите менеджера',
-    'Местоположение груза' => 'Cargo location'
+    'Местоположение груза' => 'Cargo location',
+    '$' => 'c.u',
+    'unique_phone_message' => 'Only one account can be registered per phone number.',
 ];
