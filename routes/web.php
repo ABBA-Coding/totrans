@@ -114,6 +114,8 @@ Route::prefix('admin/clients')->namespace('Admin')->group(function () {
         Route::get('/form/{id?}', 'ClientController@form')->name('admin.clients.form');
         Route::post('/form/{id?}', 'ClientController@post')->name('admin.clients.post');
         Route::delete('/{id}', 'ClientController@destroy')->name('admin.clients.destroy');
+
+        Route::get('/export', 'ClientController@export')->name('admin.clients.export');
     });
 });
 /*--------------------------------------------------------------------------------

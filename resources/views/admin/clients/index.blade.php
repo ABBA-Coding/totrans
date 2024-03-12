@@ -16,7 +16,10 @@
                                     <li class="breadcrumb-item"><a href="javascript:">Клиенты</a></li>
                                 </ul>
                             </div>
-                            <a href="{{ route('admin.clients.form') }}" class="btn btn-primary mr-0" onclick="updateUser(event, null)">Добавить</a>
+                            <div>
+                                <a href="{{ route('admin.clients.export') }}" target="_blank" class="btn btn-success">Скачать Excel</a>
+                                <a href="{{ route('admin.clients.form') }}" class="btn btn-primary mr-0" onclick="updateUser(event, null)">Добавить</a>
+                            </div>
                         </div>
                     </div>
                 </div>

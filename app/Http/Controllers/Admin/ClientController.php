@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Application;
@@ -10,7 +11,7 @@ use App\Models\Manager;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClientController extends Controller
 {
@@ -129,5 +130,10 @@ class ClientController extends Controller
 
         $model->delete();
         return redirect()->back()->with(['success'=>'Успешно удалено']);
+    }
+
+    public function export()
+    {
+        return Excel::download(new UsersExport(), 'Клиенты.xlsx');
     }
 }
