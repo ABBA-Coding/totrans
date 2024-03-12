@@ -131,5 +131,6 @@ return [
     'Выберите менеджера' => 'Menejerni tanlang',
     'Местоположение груза' => 'Yuk joylashgan manzil',
     '$' => 'sh.b',
-    'unique_phone_message' => 'Bitta telefon raqamga faqat bitta akkaunt ochish mumkin.'
+    'unique_phone_message' => 'Bitta telefon raqamga faqat bitta akkaunt ochish mumkin.',
+    'Расчет осуществляется по курсу ЦБ в сумах' => "Hisoblash Markaziy bankning so'mdagi kursi bo'yicha amalga oshiriladi"
 ];

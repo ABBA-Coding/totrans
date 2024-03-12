@@ -5,7 +5,7 @@
             <div class="modal-icon">
                 <img src="/frontend/images/icon/checked.svg" alt="" />
             </div>
-            <div class="modal-article">{{ __('static.Ваш ID') }} #{{ request()->get('_id') }}</div>
+            <div class="modal-article">{{ __('static.Ваш ID') }} {{ request()->get('_id') }}</div>
             <div class="modal-text">
                 {{ __('static.Никому не сообщайте личные данные вашего аккаунта во избежания взлома') }}
             </div>

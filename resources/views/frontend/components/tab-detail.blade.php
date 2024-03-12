@@ -133,7 +133,10 @@
                 @if($isAuto)
                 <div class="tab-price__bottom">
                     <div class="tab-price__amount">{{ __('static.Цена') }}: <span>@priceFormat(round($price)) {{ __('static.$') }}</span></div>
-                    <div class="tab-price__text">
+                    <div class="tab-price__text" style="max-width: 100%;margin-bottom: 10px">
+                        {{ __('static.Расчет осуществляется по курсу ЦБ в сумах')  }}
+                    </div>
+                    <div class="tab-price__text" style="max-width: 100%">
                         {{ __('static.Цена учтена по итогу ваших настроек, изменить цену можно выбрав други настройки грузоперевозки')  }}
                     </div>
                 </div>

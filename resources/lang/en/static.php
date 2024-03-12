@@ -132,4 +132,5 @@ return [
     'Местоположение груза' => 'Cargo location',
     '$' => 'c.u',
     'unique_phone_message' => 'Only one account can be registered per phone number.',
+    'Расчет осуществляется по курсу ЦБ в сумах' => 'Calculation is carried out at the Central Bank exchange rate in soums'
 ];

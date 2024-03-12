@@ -9,7 +9,7 @@
                     <div class="dashboard-wrapper">
 
                         <div class="dashboard-top">
-                            <div class="dashboard-top__id">{{ __('static.Мой ID') }} #{{ \Illuminate\Support\Facades\Auth::user()->login }}</div>
+                            <div class="dashboard-top__id">{{ __('static.Мой ID') }} {{ \Illuminate\Support\Facades\Auth::user()->login }}</div>
                         </div>
 
                         <div class="dashboard-main">
