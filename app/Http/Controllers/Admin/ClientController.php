@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ClientImport;
 use App\Models\Activity;
 use App\Models\Application;
 use App\Models\District;
@@ -135,5 +136,12 @@ class ClientController extends Controller
     public function export()
     {
         return Excel::download(new UsersExport(), 'Клиенты.xlsx');
+    }
+
+    public function import()
+    {
+        Excel::import(new ClientImport(), 'clients.xlsx');
+
+        return response()->json('success');
     }
 }
