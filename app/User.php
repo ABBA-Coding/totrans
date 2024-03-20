@@ -88,7 +88,7 @@ class User extends Authenticatable
     public static function generateLogin(): string
     {
         $prefix = 'AN-';
-        $start = 1990;
+        $start = 1450;
         $generates = DB::table('generated_numbers')->count();
         $newID = $prefix.($start+$generates);
 
