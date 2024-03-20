@@ -92,6 +92,6 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
 
     public function limit(): int
     {
-        return 300;
+        return 150;
     }
 }

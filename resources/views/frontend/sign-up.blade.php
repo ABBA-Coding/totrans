@@ -61,7 +61,6 @@
                                         class="registration-form__input"
                                         placeholder="{{ __('static.Введите email') }}"
                                         autocomplete="off"
-                                        required
                                     />
                                 </div>
 

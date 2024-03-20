@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Imports\ClientImport;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ImportClient extends Command

@@ -28,7 +28,6 @@
                                name="email"
                                value="{{ $data->email }}"
                                autocomplete="off"
-                               required
                                title="">
                     </div>
                 </div>
@@ -153,7 +152,6 @@
                                name="email"
                                value=""
                                autocomplete="off"
-                               required
                                title="">
                     </div>
                 </div>

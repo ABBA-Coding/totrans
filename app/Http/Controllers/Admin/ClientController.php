@@ -76,7 +76,7 @@ class ClientController extends Controller
 
                 $request->validate([
                     'name' => 'string|required',
-                    'email' => 'required|email|unique:users,email,'.$id,
+                    'email' => 'nullable|email|unique:users,email,'.$id,
                     'phone' => 'string|required',
                     'activity_id' => 'integer|required',
                     'manager_id' => 'integer|required',
@@ -94,7 +94,7 @@ class ClientController extends Controller
                 $request->validate([
                     'name' => 'required',
                     'password' => 'required',
-                    'email' => 'required|email|unique:users,email',
+                    'email' => 'nullable|email|unique:users,email',
                     'phone' => 'string|required',
                     'activity_id' => 'integer|required',
                     'manager_id' => 'integer|required',
