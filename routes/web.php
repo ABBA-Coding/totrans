@@ -116,7 +116,6 @@ Route::prefix('admin/clients')->namespace('Admin')->group(function () {
         Route::delete('/{id}', 'ClientController@destroy')->name('admin.clients.destroy');
 
         Route::get('/export', 'ClientController@export')->name('admin.clients.export');
-        Route::get('/import', 'ClientController@import')->name('admin.clients.import');
     });
 });
 /*--------------------------------------------------------------------------------

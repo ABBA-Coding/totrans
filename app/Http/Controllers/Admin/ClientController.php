@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
-use App\Imports\ClientImport;
 use App\Models\Activity;
 use App\Models\Application;
 use App\Models\District;
@@ -28,6 +27,7 @@ class ClientController extends Controller
             ->when(!empty($_q), function ($query) use ($_q){
                 $query->where('name', 'like', '%'.$_q.'%')
                 ->orWhere('phone', 'like', '%'.$_q.'%')
+                ->orWhere('phone_string', 'like', '%'.$_q.'%')
                 ->orWhere('email', 'like', '%'.$_q.'%')
                 ->orWhere('login', 'like', '%'.$_q.'%');
             })
@@ -136,12 +136,5 @@ class ClientController extends Controller
     public function export()
     {
         return Excel::download(new UsersExport(), 'Клиенты.xlsx');
-    }
-
-    public function import()
-    {
-        Excel::import(new ClientImport(), 'clients.xlsx');
-
-        return response()->json('success');
     }
 }

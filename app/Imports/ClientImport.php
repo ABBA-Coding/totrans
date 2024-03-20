@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\District;
 use App\Models\Manager;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -25,6 +26,13 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
     const COLUMN_MANAGER_NAME = 6;
     const COLUMN_REGISTRATION_DATE = 7;
 
+    public $startRowNumber = 1;
+
+    public function __construct($startRow)
+    {
+        $this->startRowNumber = $startRow;
+    }
+
     public function sheets(): array
     {
         return [
@@ -34,11 +42,9 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
 
     public function collection(Collection $rows): bool
     {
-        return true;
-
-        User::whereHas('role', function ($q) {
-            $q->where('role', User::ROLE_CLIENT);
-        })->delete();
+//        User::whereHas('role', function ($q) {
+//            $q->where('role', User::ROLE_CLIENT);
+//        })->delete();
 
         $regions = collect(District::all());
         $managers = collect(Manager::all());
@@ -65,7 +71,8 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
                 "company_name" => $row[self::COLUMN_COMPANY],
                 "district_id" => ($district instanceof District) ? $district->id : null,
                 "manager_id" => ($manager instanceof Manager) ? $manager->id : null,
-                'password' => bcrypt(Str::random(10))
+                'password' => bcrypt(Str::random(10)),
+                'created_at' => Carbon::now()
             ];
         }
 
@@ -80,11 +87,11 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
 
     public function startRow(): int
     {
-        return 1;
+        return $this->startRowNumber;
     }
 
     public function limit(): int
     {
-        return 400;
+        return 300;
     }
 }
