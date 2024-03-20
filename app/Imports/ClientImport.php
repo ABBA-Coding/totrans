@@ -34,6 +34,8 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
 
     public function collection(Collection $rows): bool
     {
+        return true;
+
         User::whereHas('role', function ($q) {
             $q->where('role', User::ROLE_CLIENT);
         })->delete();
