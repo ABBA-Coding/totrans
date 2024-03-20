@@ -80,7 +80,7 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
 
     public function startRow(): int
     {
-        return 801;
+        return 1;
     }
 
     public function limit(): int
