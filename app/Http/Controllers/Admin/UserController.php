@@ -103,14 +103,16 @@ class UserController extends Controller
 
         DB::beginTransaction();
         try {
-            DB::table('generated_numbers')->where('value', $model->login)->delete();
+            if (User::getAuthRole() === User::ROLE_CLIENT) {
+                DB::table('generated_numbers')->where('value', $model->login)->delete();
+            }
+            $model->delete();
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect()->back()->with('error', $exception->getMessage());
         }
 
-        $model->delete();
         return redirect()->back()->with(['success'=>'Успешно удалено']);
     }
 }
