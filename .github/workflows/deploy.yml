@@ -36,4 +36,5 @@ jobs:
         script_stop: true
         script: |
           git --work-tree="${{ env.TARGET_FOLDER }}" --git-dir="${{ env.TARGET_FOLDER }}/.git" clean -f .
+          chown -R www-data:www-data /var/www/totrans/
           /usr/bin/php7.4 /var/www/totrans/artisan migrate
