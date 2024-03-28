@@ -25,7 +25,7 @@
                     {{ $item->login }}
                 </td>
                 <td>
-                    {{ $item->phone ?? '--' }}
+                    {{ $item->phone ?? ($item->phone_string ?? '--') }}
                 </td>
                 <td>
                     {{ $item->email ?? '--' }}

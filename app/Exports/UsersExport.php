@@ -6,8 +6,10 @@ use App\User;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class UsersExport implements FromView, ShouldAutoSize
+class UsersExport implements FromView, ShouldAutoSize, WithColumnFormatting
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -24,5 +26,11 @@ class UsersExport implements FromView, ShouldAutoSize
         return view('exports.clients', [
             'data' => $data
         ]);
+    }
+
+    public function columnFormats(): array {
+        return [
+            'D' => NumberFormat::FORMAT_NUMBER,
+        ];
     }
 }
