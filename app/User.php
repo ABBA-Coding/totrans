@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\District;
 use App\Models\Manager;
 use App\Models\Role;
+use App\Services\BitrixService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,6 +50,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'phone_verified_at' => 'datetime',
     ];
+
+    public static function boot()
+    {
+        static::created(function (self $user) {
+            $bitrixService = new BitrixService();
+            $bitrixService->createUser($user);
+        });
+
+        parent::boot();
+    }
 
     public function activity(): BelongsTo
     {
