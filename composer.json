@@ -20,7 +20,8 @@
         "maatwebsite/excel": "^3.1",
         "mcamara/laravel-localization": "^1.6",
         "nwidart/laravel-modules": "^7.3",
-        "spatie/laravel-query-builder": "^3.0"
+        "spatie/laravel-query-builder": "^3.0",
+        "ext-curl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.4",

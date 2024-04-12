@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\District;
 use App\Models\Manager;
 use App\Models\Role;
+use App\Services\BitrixService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
