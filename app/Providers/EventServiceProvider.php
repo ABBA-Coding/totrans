@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Application;
+use App\Models\Batch;
 use App\Models\Feedback;
 use App\Observers\ApplicationObserver;
+use App\Observers\BatchObserver;
 use App\Observers\FeedbackObserver;
 use App\Observers\UserObserver;
 use App\User;
@@ -36,6 +38,7 @@ class EventServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
         Feedback::observe(FeedbackObserver::class);
         Application::observe(ApplicationObserver::class);
+        Batch::observe(BatchObserver::class);
 
         parent::boot();
 

@@ -169,18 +169,38 @@ class BitrixService
         }
     }
 
+    public function updateDealStatus($id, $status)
+    {
+        $this->baseRequest('crm.deal.update', [
+            'id' => $id,
+            'fields' => [
+                'UF_CRM_1712316955098' => $status
+            ]
+        ]);
+    }
+
+    public function updateDealState($id, $state)
+    {
+        $this->baseRequest('crm.deal.update', [
+            'id' => $id,
+            'fields' => [
+                'UF_CRM_1712317558925' => $state
+            ]
+        ]);
+    }
+
     public function getDeal($id)
     {
         return $this->baseRequest('crm.deal.get', [
             'id' => $id
-        ]);
+        ])['result'];
     }
 
     public function getContact($id)
     {
         return $this->baseRequest('crm.contact.get', [
             'id' => $id
-        ]);
+        ])['result'];
     }
 
     public function baseRequest($method, $data)
