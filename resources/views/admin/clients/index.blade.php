@@ -43,6 +43,8 @@
                                     <th>логин (ID)</th>
                                     <th>телефон</th>
                                     <th>email</th>
+                                    <th>регион</th>
+                                    <th>сфера</th>
                                     <th>компания</th>
                                     <th>менеджер</th>
                                     <th>дата регистрации</th>
@@ -86,6 +88,12 @@
                                             </td>
                                             <td>
                                                 {{ $item->email ?? '--' }}
+                                            </td>
+                                            <td>
+                                                {{ $item->district->name_ru ?? '--' }}
+                                            </td>
+                                            <td>
+                                                {{ $item->activity->title_ru ?? '--' }}
                                             </td>
                                             <td>
                                                 {{ $item->company_name }}

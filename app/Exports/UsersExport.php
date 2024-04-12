@@ -19,7 +19,7 @@ class UsersExport implements FromView, ShouldAutoSize, WithColumnFormatting
         $data = User::whereHas('role', function ($role) {
             $role->where('role', User::ROLE_CLIENT);
         })
-            ->with('activity', 'manager')
+            ->with('activity', 'manager', 'district')
             ->orderBy('created_at', 'desc')
             ->get();
 
