@@ -44,6 +44,12 @@ class BitrixService
         15 => 438
     ];
 
+    public $cities = [
+        5 => 412,
+        2 => 410,
+        1 => 414
+    ];
+
     public function createUser(User $user)
     {
         $companies = $this->baseRequest('crm.company.list', [
@@ -145,8 +151,8 @@ class BitrixService
                 'UF_CRM_1712315079793' => $this->deliveryTypes[$feedback->delivery_type],
                 'UF_CRM_1709990572889' => $feedback->weight,
                 'UF_CRM_1709990549049' => $feedback->volume,
-                'UF_CRM_1712316117902' => $feedback->pointA,
-                'UF_CRM_1712316135439' => $feedback->pointB,
+                'UF_CRM_1712659161' => $this->cities[$feedback->pointA->city->id],
+                'UF_CRM_1712659280' => $this->cities[$feedback->pointB->city->id],
             ]
         ]);
 
@@ -161,6 +167,20 @@ class BitrixService
                 ]
             ]);
         }
+    }
+
+    public function getDeal($id)
+    {
+        return $this->baseRequest('crm.deal.get', [
+            'id' => $id
+        ]);
+    }
+
+    public function getContact($id)
+    {
+        return $this->baseRequest('crm.contact.get', [
+            'id' => $id
+        ]);
     }
 
     public function baseRequest($method, $data)

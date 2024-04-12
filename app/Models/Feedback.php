@@ -23,16 +23,6 @@ class Feedback extends Model
         'point_a_id', 'point_b_id', 'delivery_type', 'weight', 'volume', 'mileage', 'seats_number', 'order_date',
         'activity_id', 'additional_id'];
 
-    public static function boot()
-    {
-        static::created(function (self $feedback) {
-            $bitrixService = new BitrixService();
-            $bitrixService->createFeedback($feedback);
-        });
-
-        parent::boot();
-    }
-
     public static function rules()
     {
         return [

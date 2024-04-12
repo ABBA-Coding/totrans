@@ -51,16 +51,6 @@ class User extends Authenticatable
         'phone_verified_at' => 'datetime',
     ];
 
-    public static function boot()
-    {
-        static::created(function (self $user) {
-            $bitrixService = new BitrixService();
-            $bitrixService->createUser($user);
-        });
-
-        parent::boot();
-    }
-
     public function activity(): BelongsTo
     {
         return $this->belongsTo(Activity::class, 'activity_id')->withDefault();
