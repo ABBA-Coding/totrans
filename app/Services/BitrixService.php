@@ -130,7 +130,7 @@ class BitrixService
                         ['VALUE' => "+998" . $feedback->phone, 'VALUE_TYPE' => 'WORK']
                     ],
                     'UF_CRM_1712314183343' => $this->activityTypes[$feedback->activity_id],
-                    'SOURCE_ID' => 'ToTrans',
+                    'SOURCE_ID' => 'UC_DJVPOP',
                 ]
             ]);
             $contactId = $contact['result'];
@@ -141,7 +141,7 @@ class BitrixService
         $deal = $this->baseRequest('crm.deal.add', [
             'fields' => [
                 'CONTACT_ID' => $contactId,
-                'SOURCE_ID' => 'Сайт ToTrans калькулятор',
+                'SOURCE_ID' => 'UC_V13QS8',
                 'CURRENCY_ID' => 'USD',
                 'OPPORTUNITY' => Feedback::calculatePrice($feedback),
                 'UF_CRM_1712315079793' => $this->deliveryTypes[$feedback->delivery_type],
