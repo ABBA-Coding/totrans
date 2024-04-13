@@ -7,6 +7,17 @@ use App\Traits\ModelHelperTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
+/**
+ * @Feedback
+ *
+ * @property int $id
+ * @property string $phone
+ * @property string $name
+ * @property string $message
+ * @property int $type
+ * @property int $status
+ */
 class Feedback extends Model
 {
     use ModelHelperTrait;

@@ -35,14 +35,14 @@ class BatchObserver
 
     public function updated(Batch $batch)
     {
-        if($batch->wasChanged('status')){
+        if($batch->wasChanged('status')) {
             $applications = $batch->applications;
             foreach ($applications as $application){
                 $this->service->updateDealStatus($application->bitrix_id, $this->status[$batch->status]);
             }
         }
 
-        if($batch->wasChanged('state_id')){
+        if($batch->wasChanged('state_id')) {
             $applications = $batch->applications;
             foreach ($applications as $application){
                 $this->service->updateDealState($application->bitrix_id, $this->states[$batch->state_id]);

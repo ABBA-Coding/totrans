@@ -10,6 +10,6 @@ class FeedbackObserver
     public function created(Feedback $feedback): void
     {
         $service = new BitrixService();
-        $service->createFeedback($feedback);
+        $service->createFeedback($feedback->id);
     }
 }
