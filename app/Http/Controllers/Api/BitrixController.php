@@ -36,6 +36,7 @@ class BitrixController extends Controller
         $contactId = $deal['CONTACT_ID'];
         $contact = $service->getContact($contactId);
         $phone = str_replace("+998", "", $contact['PHONE'][0]['VALUE']);
+        $phone = preg_replace('/[^0-9]/', '', $phone);
         $user = User::where('phone', $phone)->first();
         $pointA = $this->cities[$deal['UF_CRM_1712659161']];
         $pointB = $this->cities[$deal['UF_CRM_1712659280']];
