@@ -56,7 +56,8 @@ class BitrixService
         $user = User::query()
             ->with(['district'])
             ->where('id', '=', $userId)
-            ->first();
+            ->firstOrFail();
+
         $companies = $this->baseRequest('crm.company.list', [
             'filter' => [
                 'TITLE' => $user->company_name
@@ -103,7 +104,7 @@ class BitrixService
         $feedback = Feedback::query()
             ->with(['pointA', 'pointB'])
             ->where('id', '=', $feedBackId)
-            ->first();
+            ->firstOrFail();
 
         $pointA = '';
         $pointB = '';
