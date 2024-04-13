@@ -240,7 +240,8 @@ class BitrixService
             'ASSIGNED_BY_ID' => $this->managerIds[$user->manager_id],
             'ADDRESS' => $user->district->name_ru ?? '',
             'COMPANY_ID' => $companyId,
-            'SOURCE_ID' => 'ToTrans',
+            'SOURCE_ID' => '384',
+            'UF_CRM_1682395260559' => (string) $user->id
         ];
     }
 }
