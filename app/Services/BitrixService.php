@@ -50,16 +50,21 @@ class BitrixService
         1 => 414
     ];
 
-    public function createUser(User $user)
+    public function createUser(int $userId)
     {
+        /** @var User $user */
+        $user = User::query()
+            ->with(['district'])
+            ->where('id', '=', $userId)
+            ->firstOrFail();
+
         $companies = $this->baseRequest('crm.company.list', [
             'filter' => [
                 'TITLE' => $user->company_name
             ]
         ]);
 
-        if(empty($companies['result']))
-        {
+        if (empty($companies['result'])) {
             $company = $this->baseRequest('crm.company.add', [
                 'fields' => [
                     'TITLE' => $user->company_name,
@@ -82,51 +87,42 @@ class BitrixService
 
         if (empty($users['result'])) {
             $this->baseRequest('crm.contact.add', [
-                'fields' => [
-                    'NAME' => $user->name,
-                    'PHONE' => [
-                        ['VALUE' => "+998" . $user->phone, 'VALUE_TYPE' => 'WORK']
-                    ],
-                    'EMAIL' => [
-                        ['VALUE' => $user->email, 'VALUE_TYPE' => 'WORK']
-                    ],
-                    'UF_CRM_1712314183343' => $this->activityTypes[$user->activity_id],
-                    'ASSIGNED_BY_ID' => $this->managerIds[$user->manager_id],
-                    'ADDRESS' => $user->district->name_ru ?? '',
-                    'COMPANY_ID' => $companyId,
-                    'SOURCE_ID' => 'ToTrans',
-                ]
+                'fields' => $this->getContactData($user, $companyId)
             ]);
-        }else{
+        } else {
             $this->baseRequest('crm.contact.update', [
                 'id' => $users['result'][0]['ID'],
-                'fields' => [
-                    'NAME' => $user->name,
-                    'PHONE' => [
-                        ['VALUE' => "+998" . $user->phone, 'VALUE_TYPE' => 'WORK']
-                    ],
-                    'EMAIL' => [
-                        ['VALUE' => $user->email, 'VALUE_TYPE' => 'WORK']
-                    ],
-                    'UF_CRM_1712314183343' => $this->activityTypes[$user->activity_id],
-                    'ASSIGNED_BY_ID' => $this->managerIds[$user->manager_id],
-                    'ADDRESS' => $user->district->name_ru ?? '',
-                    'COMPANY_ID' => $companyId,
-                    'SOURCE_ID' => 'ToTrans',
-                ]
+                'fields' => $this->getContactData($user, $companyId)
             ]);
         }
     }
 
-    public function createFeedback(Feedback $feedback)
+    public function createFeedback(int $feedBackId)
     {
+
+        /** @var Feedback $feedback */
+        $feedback = Feedback::query()
+            ->with(['pointA', 'pointB'])
+            ->where('id', '=', $feedBackId)
+            ->firstOrFail();
+
+        $pointA = '';
+        $pointB = '';
+
+        if (is_null($feedback->pointA->city) === false && is_null($feedback->pointB->city) === false) {
+            $pointA = $this->cities[$feedback->pointA->city->id];
+            $pointB = $this->cities[$feedback->pointB->city->id];
+        }
+
+
+
         $contacts = $this->baseRequest('crm.contact.list', [
             'filter' => [
                 'PHONE' => "+998" . $feedback->phone
             ]
         ]);
 
-        if(empty($contacts['result'])) {
+        if (empty($contacts['result'])) {
             $contact = $this->baseRequest('crm.contact.add', [
                 'fields' => [
                     'NAME' => $feedback->name,
@@ -151,14 +147,14 @@ class BitrixService
                 'UF_CRM_1712315079793' => $this->deliveryTypes[$feedback->delivery_type],
                 'UF_CRM_1709990572889' => $feedback->weight,
                 'UF_CRM_1709990549049' => $feedback->volume,
-                'UF_CRM_1712659161' => $this->cities[$feedback->pointA->city->id],
-                'UF_CRM_1712659280' => $this->cities[$feedback->pointB->city->id],
+                'UF_CRM_1712659161' => $pointA,
+                'UF_CRM_1712659280' => $pointB,
             ]
         ]);
 
         $dealId = $deal['result'];
 
-        if($feedback->additional->exists()){
+        if ($feedback->additional->exists()) {
             $this->baseRequest('crm.timeline.comment.add', [
                 'fields' => [
                     'ENTITY_ID' => $dealId,
@@ -222,5 +218,29 @@ class BitrixService
         curl_close($curl);
 
         return json_decode($result, true);
+    }
+
+    /**
+     * @param User $user
+     * @param $companyId
+     * @return array
+     */
+    public function getContactData(User $user, $companyId): array
+    {
+
+        return [
+            'NAME' => $user->name,
+            'PHONE' => [
+                ['VALUE' => "+998" . $user->phone, 'VALUE_TYPE' => 'WORK']
+            ],
+            'EMAIL' => [
+                ['VALUE' => $user->email, 'VALUE_TYPE' => 'WORK']
+            ],
+            'UF_CRM_1712314183343' => $this->activityTypes[$user->activity_id],
+            'ASSIGNED_BY_ID' => $this->managerIds[$user->manager_id],
+            'ADDRESS' => $user->district->name_ru ?? '',
+            'COMPANY_ID' => $companyId,
+            'SOURCE_ID' => 'ToTrans',
+        ];
     }
 }
