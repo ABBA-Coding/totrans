@@ -102,16 +102,15 @@ class BitrixService
 
         /** @var Feedback $feedback */
         $feedback = Feedback::query()
-            ->with(['pointA', 'pointB'])
             ->where('id', '=', $feedBackId)
             ->firstOrFail();
 
         $pointA = '';
         $pointB = '';
 
-        if (is_null($feedback->pointA->city) === false && is_null($feedback->pointB->city) === false) {
-            $pointA = $this->cities[$feedback->pointA->city->id];
-            $pointB = $this->cities[$feedback->pointB->city->id];
+        if ($feedback->point_a_id !== null && $feedback->point_b_id !== null) {
+            $pointA = $this->cities[$feedback->point_a_id];
+            $pointB = $this->cities[$feedback->point_b_id];
         }
 
 
@@ -143,6 +142,8 @@ class BitrixService
                 'CONTACT_ID' => $contactId,
                 'SOURCE_ID' => 'UC_V13QS8',
                 'CURRENCY_ID' => 'USD',
+                'CATEGORY_ID' => 4,
+                'STAGE_ID' => 'C4:NEW',
                 'OPPORTUNITY' => Feedback::calculatePrice($feedback),
                 'UF_CRM_1712315079793' => $this->deliveryTypes[$feedback->delivery_type],
                 'UF_CRM_1709990572889' => $feedback->weight,
