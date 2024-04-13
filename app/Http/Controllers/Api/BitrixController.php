@@ -40,15 +40,18 @@ class BitrixController extends Controller
         $pointA = $this->cities[$deal['UF_CRM_1712659161']];
         $pointB = $this->cities[$deal['UF_CRM_1712659280']];
         $deliveryType = $this->deliveryTypes[$deal['UF_CRM_1712315079793']];
-        $weight = $deal['UF_CRM_1709990572889'];
+        $weight = $this->convertEmptyToNull($deal['UF_CRM_1709990572889']);
         $application = new Application();
+        $application->application_number = $deal['ID'];
         $application->user_id = $user->id;
         $application->point_a_id = $pointA;
         $application->point_b_id = $pointB;
         $application->delivery_type = $deliveryType;
         $application->weight = $weight;
         $application->price = $deal['OPPORTUNITY'];
-        $application->order_date = now()->timestamp;
+//        $application->order_date = Carbon::now()->timestamp;
+        $application->volume = $this->convertEmptyToNull($deal['UF_CRM_1709990549049']);
+        $application->mileage = $this->convertEmptyToNull($deal['UF_CRM_1712898713429']);
         $application->bitrix_id = $deal['ID'];
         $application->save();
 
@@ -56,5 +59,10 @@ class BitrixController extends Controller
             'success' => true,
             'message' => 'Application created successfully'
         ]);
+    }
+
+    public function convertEmptyToNull($value)
+    {
+        return $value === '' ? null : $value;
     }
 }
