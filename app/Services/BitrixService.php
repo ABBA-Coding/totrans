@@ -166,6 +166,18 @@ class BitrixService
         }
     }
 
+    public function assignBatch($id, $batch, $status, $state)
+    {
+        $this->baseRequest('crm.deal.update', [
+           'id' => $id,
+           'fields' => [
+               'UF_CRM_1709990424421' => $batch,
+               'UF_CRM_1712316955098' => $status,
+               'UF_CRM_1712317558925' => $state
+           ]
+        ]);
+    }
+
     public function updateDealStatus($id, $status)
     {
         $this->baseRequest('crm.deal.update', [
