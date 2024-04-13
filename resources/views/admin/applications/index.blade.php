@@ -66,7 +66,7 @@
                                                 {{ $item->pointB->country->name_ru }}<br>({{ $item->pointB->name_ru }})
                                             </td>
                                             <td>
-                                                {{ \Carbon\Carbon::createFromTimestamp($item->order_date)->format('d-m-Y') }}
+                                                {{ $item->order_date }}
                                             </td>
                                             <td>
                                                 {{ $item->batch->batch_number }}
