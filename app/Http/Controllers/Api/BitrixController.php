@@ -50,7 +50,7 @@ class BitrixController extends Controller
         $application->delivery_type = $deliveryType;
         $application->weight = $weight;
         $application->price = $deal['OPPORTUNITY'];
-//        $application->order_date = Carbon::now()->timestamp;
+        $application->order_date = date('d.m.Y');
         $application->volume = $this->convertEmptyToNull($deal['UF_CRM_1709990549049']);
         $application->mileage = $this->convertEmptyToNull($deal['UF_CRM_1712898713429']);
         $application->bitrix_id = $deal['ID'];
