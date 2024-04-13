@@ -241,7 +241,7 @@ class BitrixService
             'ADDRESS' => $user->district->name_ru ?? '',
             'COMPANY_ID' => $companyId,
             'SOURCE_ID' => '384',
-            'UF_CRM_1682395260559' => (string) $user->id
+            'UF_CRM_1682395260559' => $user->login
         ];
     }
 }
