@@ -54,9 +54,14 @@ class BatchController extends CrudController
         }
 
         if (count($otherIds) > 0) {
-            Application::whereIn('id', $otherIds)->update([
+            $applications = Application::whereIn('id', $otherIds);
+            $applications->update([
                 'batch_id' => $id
             ]);
+            $observer = new \App\Observers\ApplicationObserver();
+            $applications->each(function($application) use ($observer) {
+                $observer->updated($application);
+            });
         }
 
         return redirect()->back()->with(['success'=>'Успешно сохранено']);
