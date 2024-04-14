@@ -33,6 +33,7 @@ class ApplicationObserver
         {
             $batch = Batch::find($application->batch_id);
             (new BitrixService())->assignBatch($application->bitrix_id, $batch->batch_number, $this->status[$batch->status], $this->states[$batch->state_id]);
+            \Log::info('Batch assigned to application', [$application->bitrix_id, $batch->batch_number, $this->status[$batch->status], $this->states[$batch->state_id]]);
         }
     }
 }
