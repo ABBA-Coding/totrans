@@ -6,6 +6,7 @@ use App\Http\Controllers\CrudController;
 use App\Models\Application;
 use App\Models\Batch;
 use App\Models\State;
+use App\Services\BitrixService;
 use Illuminate\Http\Request;
 
 /**
@@ -58,9 +59,11 @@ class BatchController extends CrudController
             $applications->update([
                 'batch_id' => $id
             ]);
-            $observer = new \App\Observers\ApplicationObserver();
-            $applications->each(function($application) use ($observer) {
-                $observer->updated($application);
+            $service = new BitrixService();
+            $applications->each(function($application) use ($service, $id) {
+                if($application->bitrix_id !== null){
+                    $service->assignBatch($application->bitrix_id, $id);
+                }
             });
         }
 

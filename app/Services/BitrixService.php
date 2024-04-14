@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Application;
+use App\Models\Batch;
 use App\Models\Feedback;
 use App\User;
 
@@ -48,6 +49,25 @@ class BitrixService
         5 => 412,
         2 => 410,
         1 => 414
+    ];
+
+    public $status = [
+        Batch::STATUS_WAITING => 320,
+        Batch::STATUS_PROCESSING => 322,
+        Batch::STATUS_COMPLETED => 324,
+        Batch::STATUS_REJECTED => 326,
+    ];
+
+    public $states = [
+        7 => 328,
+        8 => 330,
+        14 => 332,
+        15 => 334,
+        16 => 336,
+        17 => 338,
+        18 => 340,
+        5 => 342,
+        6 => 344,
     ];
 
     public function createUser(int $userId)
@@ -166,12 +186,16 @@ class BitrixService
         }
     }
 
-    public function assignBatch($id, $batch, $status, $state)
+    public function assignBatch($id, $batch)
     {
+        $batch = Batch::find($batch);
+        $status = $this->status[$batch->status];
+        $state = $this->states[$batch->state_id];
+
         $this->baseRequest('crm.deal.update', [
            'id' => $id,
            'fields' => [
-               'UF_CRM_1709990424421' => (string)$batch,
+               'UF_CRM_1709990424421' => (string)$batch->batch_number,
                'UF_CRM_1712316955098' => $status,
                'UF_CRM_1712317558925' => $state
            ]
