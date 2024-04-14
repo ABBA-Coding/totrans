@@ -61,7 +61,9 @@ class BatchController extends CrudController
             ]);
             $service = new BitrixService();
             $applications->each(function($application) use ($service, $id) {
-                $service->assignBatch($application->bitrix_id, $id);
+                if($application->bitrix_id !== null){
+                    $service->assignBatch($application->bitrix_id, $id);
+                }
             });
         }
 
