@@ -186,6 +186,17 @@ class BitrixService
         }
     }
 
+    public function addCommentToDeal($dealId, $comment)
+    {
+        $this->baseRequest('crm.timeline.comment.add', [
+            'fields' => [
+                'ENTITY_ID' => $dealId,
+                'ENTITY_TYPE' => 'deal',
+                'COMMENT' => $comment,
+            ]
+        ]);
+    }
+
     public function assignBatch($id, $batch)
     {
         $batch = Batch::find($batch);

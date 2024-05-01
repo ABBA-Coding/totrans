@@ -33,11 +33,15 @@ class BitrixController extends Controller
 
         $service = new BitrixService();
         $deal = $service->getDeal($params['id']);
-        $contactId = $deal['CONTACT_ID'];
-        $contact = $service->getContact($contactId);
-        $phone = str_replace("+998", "", $contact['PHONE'][0]['VALUE']);
-        $phone = preg_replace('/[^0-9]/', '', $phone);
-        $user = User::where('phone', $phone)->first();
+        $contactId = $deal['UF_CRM_1714110375'];
+        $user = User::where('login', $contactId)->first();
+        if (!$user) {
+            $service->addCommentToDeal($params['id'], 'CLIENT_ID : ' . $contactId . ' ни сайтга киритиб кайтадан уриниб куринг.');
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ]);
+        }
         $pointA = $this->cities[$deal['UF_CRM_1712659161']];
         $pointB = $this->cities[$deal['UF_CRM_1712659280']];
         $deliveryType = $this->deliveryTypes[$deal['UF_CRM_1712315079793']];
