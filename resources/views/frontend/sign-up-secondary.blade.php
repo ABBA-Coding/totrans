@@ -7,7 +7,7 @@
                 <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
                     <div class="container">
                         <div class="registration-left">
-                            <a href="{{ route('profile.sign-up') }}" class="registration-left__back">
+                            <a href="{{ route('profile.sign-up', [request()->getQueryString()]) }}" class="registration-left__back">
                                 <img src="/frontend/images/icon/back.svg" alt="" />
                                 <span>{{ __('static.Назад') }}</span>
                             </a>
@@ -16,12 +16,39 @@
                                 {{ csrf_field() }}
 
                                 <input type="hidden" name="name" value="{{ request()->get('name') }}">
+                                <input type="hidden" name="surname" value="{{ request()->get('surname') }}">
                                 <input type="hidden" name="email" value="{{ request()->get('email') }}">
                                 <input type="hidden" name="phone" value="{{ request()->get('phone') }}">
                                 <input type="hidden" name="password" value="{{ request()->get('password') }}">
-                                <input type="hidden" name="company_name" value="{{ request()->get('company_name') }}">
 
                                 <div class="registration-form__title">{{ __('static.Регистрация') }}</div>
+
+                                <div class="registration-form__box">
+                                    <div class="registration-form__type">{{ __('static.Компания') }}<span>*</span></div>
+                                    <input
+                                        name="company_name"
+                                        type="text"
+                                        class="registration-form__input"
+                                        placeholder="{{ __('static.Введите название компании') }}"
+                                        autocomplete="off"
+                                        value="{{ request()->get('company_name') }}"
+                                        required
+                                    />
+                                </div>
+
+                                <div class="registration-form__box">
+                                    <div class="registration-form__type">{{ __('static.Дата рождение') }}<span>*</span></div>
+                                    <input
+                                        name="birthday"
+                                        type="text"
+                                        class="registration-form__input"
+                                        placeholder="{{ __('static.Введите дата рождению') }}"
+                                        autocomplete="off"
+                                        value="{{ request()->get('birthday') }}"
+                                        required
+                                        data-field-type="birthday"
+                                    />
+                                </div>
 
                                 <div class="registration-form__box">
                                     <div class="registration-form__type">{{ __('static.Выберите сферу деятельности') }}</div>

@@ -20,6 +20,34 @@
                     </div>
                 </div>
                 <div class="col-6">
+                    <!------ surname ------>
+                    <div class="form-group">
+                        <label>Фамилия</label>
+                        <input type="text"
+                               class="form-control"
+                               name="surname"
+                               value="{{ $data->surname }}"
+                               autocomplete="off"
+                               title="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <!------ birthday ------>
+                    <div class="form-group">
+                        <label>Дата рождение</label>
+                        <input type="text"
+                               class="form-control"
+                               name="birthday"
+                               value="{{ $data->birthday }}"
+                               autocomplete="off"
+                               data-field-type="birthday"
+                               title="">
+                    </div>
+                </div>
+                <div class="col-6">
                     <!------ email ------>
                     <div class="form-group">
                         <label>Email</label>
@@ -144,6 +172,34 @@
                     </div>
                 </div>
                 <div class="col-6">
+                    <!------ surname ------>
+                    <div class="form-group">
+                        <label>Фамилия</label>
+                        <input type="text"
+                               class="form-control"
+                               name="surname"
+                               value=""
+                               autocomplete="off"
+                               title="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <!------ name ------>
+                    <div class="form-group">
+                        <label>Дата рождение</label>
+                        <input type="text"
+                               class="form-control"
+                               name="birthday"
+                               value=""
+                               autocomplete="off"
+                               data-field-type="birthday"
+                               title="">
+                    </div>
+                </div>
+                <div class="col-6">
                     <!------ email ------>
                     <div class="form-group">
                         <label>Email</label>
@@ -231,17 +287,37 @@
                 </select>
             </div>
 
-            <!------ password ------>
-            <div class="form-group">
-                <label>Пароль</label>
-                <input type="text"
-                       class="form-control"
-                       name="password"
-                       value=""
-                       autocomplete="off"
-                       required
-                       title="">
+            <div class="row">
+                <div class="col-6">
+                    <!------ password ------>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="text"
+                               class="form-control"
+                               name="password"
+                               value=""
+                               autocomplete="off"
+                               required
+                               title="">
+                    </div>
+                </div>
+                @if(\App\User::getAuthRole() === \App\User::ROLE_ADMIN)
+                    <div class="col-6">
+                        <!------ login ------>
+                        <div class="form-group">
+                            <label>Логин (ID)</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="login"
+                                   value=""
+                                   autocomplete="off"
+                                   title="">
+                        </div>
+                    </div>
+                @endif
             </div>
+
+
         </div>
 
         <div class="modal-footer pr-0">

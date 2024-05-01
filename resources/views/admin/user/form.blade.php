@@ -39,6 +39,7 @@
                 <select class="form-control select2" name="role" title="">
                     <option value="{{ \App\User::ROLE_LOGIST }}" {{ $data->role->role == \App\User::ROLE_LOGIST ? 'selected' : '' }}>Logist</option>
                     <option value="{{ \App\User::ROLE_SALES }}" {{ $data->role->role == \App\User::ROLE_SALES ? 'selected' : '' }}>Sales Manager</option>
+                    <option value="{{ \App\User::ROLE_MANAGER }}" {{ $data->role->role == \App\User::ROLE_MANAGER ? 'selected' : '' }}>Manager</option>
                 </select>
             </div>
             @endif
@@ -89,6 +90,7 @@
                 <select class="form-control select2" name="role" title="">
                     <option value="{{ \App\User::ROLE_LOGIST }}">Logist</option>
                     <option value="{{ \App\User::ROLE_SALES }}">Sales Manager</option>
+                    <option value="{{ \App\User::ROLE_MANAGER }}">Manager</option>
                 </select>
             </div>
             <!------ password ------>

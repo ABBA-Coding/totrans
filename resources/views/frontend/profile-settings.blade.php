@@ -45,6 +45,17 @@
 
                                         <div class="account-section__box">
                                             <div class="account-section__item">
+                                                <div class="account-section__type">{{ __('static.Фамилия') }}</div>
+                                                <div class="account-section__name">{{ $user->surname ?? '-' }}</div>
+                                            </div>
+                                            <a href="{{ route('profile.settings', ['edit' => true]) }}" class="account-section__button">
+                                                <img src="/frontend/images/icon/pencil.svg" alt="" />
+                                                <span>{{ __('static.Редактировать') }}</span>
+                                            </a>
+                                        </div>
+
+                                        <div class="account-section__box">
+                                            <div class="account-section__item">
                                                 <div class="account-section__type">{{ __('static.Сфера деятельности') }}</div>
                                                 <div class="account-section__name">{{ $user->activity->{'title_'.$lang} }}</div>
                                             </div>
@@ -57,7 +68,7 @@
                                         <div class="account-section__box">
                                             <div class="account-section__item">
                                                 <div class="account-section__type">{{ __('static.Номер телефона') }}</div>
-                                                <div class="account-section__name">{{ $user->phone }}</div>
+                                                <div class="account-section__name">{{ $user->phone ?? '-' }}</div>
                                             </div>
                                             <a href="{{ route('profile.settings', ['edit' => true]) }}" class="account-section__button">
                                                 <img src="/frontend/images/icon/pencil.svg" alt="" />
@@ -69,7 +80,7 @@
                                             <div class="account-section__item">
                                                 <div class="account-section__type">{{ __('static.E-mail') }}</div>
                                                 <div class="account-section__name">
-                                                    {{ $user->email }}
+                                                    {{ $user->email ?? '-' }}
                                                 </div>
                                             </div>
                                             <a href="{{ route('profile.settings', ['edit' => true]) }}" class="account-section__button">
@@ -106,6 +117,28 @@
                                             </div>
                                         </div>
 
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="account-section__item">
+                                                    <div class="account-section__type">{{ __('static.Фамилия') }}</div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="tab-form__input" name="surname" title="" value="{{ $user->surname }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="account-section__item">
+                                                    <div class="account-section__type">{{ __('static.Дата рождение') }}</div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="tab-form__input" name="birthday" title=""
+                                                               data-field-type="birthday" value="{{ $user->birthday }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="row">
                                             <div class="col-12 col-md-6">

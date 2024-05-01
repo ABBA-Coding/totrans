@@ -89,6 +89,7 @@
 
 <script>
     $('input[data-field-type="phone"]').inputmask("99 999 99 99");  //static mask
+    $('input[data-field-type="birthday"]').inputmask("99.99.9999");  //static mask
 </script>
 
 </body>

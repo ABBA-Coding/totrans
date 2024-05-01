@@ -25,6 +25,20 @@
                                         placeholder="{{ __('static.Введите ваше имя') }}"
                                         autocomplete="off"
                                         required
+                                        value="{{ request()->get('name') ?? '' }}"
+                                    />
+                                </div>
+
+                                <div class="registration-form__box">
+                                    <div class="registration-form__type">{{ __('static.Фамилия') }}<span>*</span></div>
+                                    <input
+                                        name="surname"
+                                        type="text"
+                                        class="registration-form__input"
+                                        placeholder="{{ __('static.Введите ваше фамилию') }}"
+                                        autocomplete="off"
+                                        required
+                                        value="{{ request()->get('surname') ?? '' }}"
                                     />
                                 </div>
 
@@ -49,11 +63,12 @@
                                         placeholder="{{ __('static.Введите номер телефона') }}"
                                         autocomplete="off"
                                         data-field-type="phone"
+                                        value="{{ request()->get('phone') ?? '' }}"
                                         required
                                     />
                                 </div>
 
-                                <div class="registration-form__box">
+                                <div class="registration-form__box mb-30">
                                     <div class="registration-form__type">{{ __('static.E-mail') }}<span>*</span></div>
                                     <input
                                         name="email"
@@ -61,18 +76,7 @@
                                         class="registration-form__input"
                                         placeholder="{{ __('static.Введите email') }}"
                                         autocomplete="off"
-                                    />
-                                </div>
-
-                                <div class="registration-form__box mb-30">
-                                    <div class="registration-form__type">{{ __('static.Компания') }}<span>*</span></div>
-                                    <input
-                                        name="company_name"
-                                        type="text"
-                                        class="registration-form__input"
-                                        placeholder="{{ __('static.Введите название компании') }}"
-                                        autocomplete="off"
-                                        required
+                                        value="{{ request()->get('email') ?? '' }}"
                                     />
                                 </div>
 

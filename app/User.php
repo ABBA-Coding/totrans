@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\District;
 use App\Models\Manager;
 use App\Models\Role;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +20,7 @@ class User extends Authenticatable
     const ROLE_ADMIN = 'admin';
     const ROLE_LOGIST = 'logist';
     const ROLE_SALES = 'sales';
+    const ROLE_MANAGER = 'manager';
     const ROLE_CLIENT = 'client';
 
     /**
@@ -28,7 +30,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id', 'name', 'login', 'email', 'email_verified_at', 'password', 'phone', 'phone_verified_at', 'activity_id',
-        'manager_id', 'company_name', 'district_id'
+        'manager_id', 'company_name', 'district_id', 'birthday', 'surname'
     ];
 
     /**
@@ -78,6 +80,21 @@ class User extends Authenticatable
     public function setPhoneAttribute($value)
     {
         $this->attributes['phone']  = preg_replace('/\D+/', null, $value);
+    }
+
+    public function setBirthdayAttribute($value)
+    {
+        if (!empty($value)) {
+            $this->attributes['birthday'] = Carbon::createFromFormat('d.m.Y', $value)->unix();
+        }
+    }
+
+    public function getBirthdayAttribute($value)
+    {
+        if (!empty($value)) {
+            return Carbon::createFromTimestamp($value)->format('d.m.Y');
+        }
+        return null;
     }
 
     public static function getAuthRole()

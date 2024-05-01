@@ -19,7 +19,7 @@
                 </li>
 
 
-                @if(\App\User::getAuthRole() === \App\User::ROLE_ADMIN)
+                @if(in_array(\App\User::getAuthRole(), [\App\User::ROLE_ADMIN, \App\User::ROLE_MANAGER]))
                     <li class="nav-item">
                         <a href="{{ route('admin.countries.index') }}" class="nav-link ">
                         <span class="pcoded-micon">
@@ -83,6 +83,7 @@
                         </a>
                     </li>
 
+                    @if(\App\User::getAuthRole() == \App\User::ROLE_ADMIN)
                     <li class="nav-item">
                         <a href="{{ route('admin.clients.index') }}" class="nav-link ">
                         <span class="pcoded-micon">
@@ -91,6 +92,7 @@
                             <span class="pcoded-mtext">Клиенты</span>
                         </a>
                     </li>
+                    @endif
 
                     <li class="nav-item">
                         <a href="{{ route('admin.applications.index') }}" class="nav-link ">
@@ -110,6 +112,7 @@
                         </a>
                     </li>
 
+                    @if(\App\User::getAuthRole() == \App\User::ROLE_ADMIN)
                     <li class="nav-item">
                         <a href="{{ route('admin.user.index') }}" class="nav-link ">
                         <span class="pcoded-micon">
@@ -118,6 +121,7 @@
                             <span class="pcoded-mtext">Пользователи</span>
                         </a>
                     </li>
+                    @endif
 
                 @else
                     <li class="nav-item">

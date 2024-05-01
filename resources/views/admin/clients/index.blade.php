@@ -64,7 +64,7 @@
                                                    title="">
                                         </div>
                                     </td>
-                                    <td colspan="6"></td>
+                                    <td colspan="8"></td>
                                     <td class="w-200p">
                                         <button type="submit" form="tableForm" class="btn btn-primary w-100">Поиск</button>
                                     </td>
@@ -78,7 +78,8 @@
                                                 {{ ($data->currentpage()-1) * $data->perpage() + $key + 1 }}
                                             </td>
                                             <td>
-                                                {{ $item->name }}
+                                                {{ $item->name }} <br>
+                                                {{ $item->surname }}
                                             </td>
                                             <td>
                                                 {{ $item->login }}
@@ -173,6 +174,11 @@
                     let phoneMaskInput = $('input[data-field-type="phone"]');
                     if (phoneMaskInput.length > 0) {
                         phoneMaskInput.inputmask("99 999 99 99");  //static mask
+                    }
+
+                    let birthdayMaskInput = $('input[data-field-type="birthday"]');
+                    if (birthdayMaskInput.length > 0) {
+                        birthdayMaskInput.inputmask("99.99.9999");  //static mask
                     }
                 },
                 error: function (error) {

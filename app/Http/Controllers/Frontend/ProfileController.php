@@ -101,6 +101,8 @@ class ProfileController extends Controller
     {
         $request->validate([
             'name' => 'string|nullable',
+            'surname' => 'string|nullable',
+            'birthday' => 'string|nullable',
             'phone' => 'string|nullable',
             'company_name' => 'string|nullable',
             'email' => 'string|email|nullable',
@@ -152,6 +154,7 @@ class ProfileController extends Controller
     {
         $request->validate([
             'name' => 'string|required',
+            'surname' => 'string|nullable',
             'phone' => 'string|required',
             'company_name' => 'string|nullable',
             'email' => 'string|email|nullable|unique:users,email',
@@ -168,7 +171,7 @@ class ProfileController extends Controller
 
         DB::beginTransaction();
         try {
-            $data = $request->only(['name', 'phone', 'company_name', 'email', 'activity_id', 'manager_id', 'district_id']);
+            $data = $request->only(['name', 'surname', 'birthday', 'phone', 'company_name', 'email', 'activity_id', 'manager_id', 'district_id']);
             $data['password'] = bcrypt($request->get('password'));
             $data['login'] = User::generateLogin();
 

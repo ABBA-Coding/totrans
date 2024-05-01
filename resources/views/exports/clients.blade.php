@@ -3,6 +3,7 @@
     <tr>
         <th class="w-50p">№</th>
         <th>имя</th>
+        <th>фамилия</th>
         <th>логин (ID)</th>
         <th>телефон</th>
         <th>email</th>
@@ -10,6 +11,7 @@
         <th>сфера</th>
         <th>компания</th>
         <th>менеджер</th>
+        <th>дата рождения</th>
         <th>дата регистрации</th>
     </tr>
     </thead>
@@ -22,6 +24,9 @@
                 </td>
                 <td>
                     {{ $item->name }}
+                </td>
+                <td>
+                    {{ $item->surname }}
                 </td>
                 <td>
                     {{ $item->login }}
@@ -43,6 +48,9 @@
                 </td>
                 <td>
                     {{ $item->manager->name_ru }}
+                </td>
+                <td>
+                    {{ $item->birthday }}
                 </td>
                 <td>
                     {{ $item->created_at->format('d.m.Y / H:i:s') }}

@@ -66,7 +66,7 @@ class ClientController extends Controller
 
     public function post(Request $request, $id = null)
     {
-        $data = $request->only(['name', 'email', 'phone', 'activity_id', 'manager_id', 'district_id', 'company_name']);
+        $data = $request->only(['name', 'surname', 'birthday', 'email', 'phone', 'activity_id', 'manager_id', 'district_id', 'company_name']);
 
         $password = $request->get('password');
 
@@ -96,13 +96,22 @@ class ClientController extends Controller
                     'password' => 'required',
                     'email' => 'nullable|email|unique:users,email',
                     'phone' => 'string|required',
+                    'login' => 'string|nullable',
                     'activity_id' => 'integer|required',
                     'manager_id' => 'integer|required',
                     'district_id' => 'integer|required',
                 ]);
 
                 $data['password'] = bcrypt($password);
-                $data['login'] = User::generateLogin();
+
+                if (empty($request->get('login'))) {
+                    $data['login'] = User::generateLogin();
+                } else {
+                    if (User::where('login', $request->login)->exists()) {
+                        throw new \DomainException('The Login field must be unique. Please specify another Login.');
+                    }
+                    $data['login'] = $request->get('login');
+                }
 
                 $user = $this->modelClass::create($data);
 

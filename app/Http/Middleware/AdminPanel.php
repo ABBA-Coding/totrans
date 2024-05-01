@@ -23,7 +23,7 @@ class AdminPanel
             $role = $user->role->role;
             $unauthorized = false;
 
-            if (in_array($role, [User::ROLE_ADMIN, User::ROLE_LOGIST, User::ROLE_SALES])) {
+            if (in_array($role, [User::ROLE_ADMIN, User::ROLE_LOGIST, User::ROLE_SALES, User::ROLE_MANAGER])) {
                 if($request->method() == 'GET') {
 
                     if ($role === User::ROLE_LOGIST) {
@@ -32,6 +32,10 @@ class AdminPanel
                         }
                     } elseif ($role === User::ROLE_SALES) {
                         if (!$request->is('admin/feedback*') && !$request->is('admin/clients*') && !$request->is('admin/applications*')) {
+                            $unauthorized = true;
+                        }
+                    } elseif ($role === User::ROLE_MANAGER) {
+                        if ($request->is('admin/clients*') || $request->is('admin/users*')) {
                             $unauthorized = true;
                         }
                     }

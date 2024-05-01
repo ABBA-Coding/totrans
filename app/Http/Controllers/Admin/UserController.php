@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $data = $this->modelClass::whereHas('role', function ($role) {
-            $role->whereIn('role', [User::ROLE_ADMIN, User::ROLE_LOGIST, User::ROLE_SALES]);
+            $role->where('role', '<>', User::ROLE_CLIENT);
         })
             ->orderBy('created_at', 'desc')
             ->paginate(20);

@@ -30,7 +30,7 @@ class UsersExport implements FromView, ShouldAutoSize, WithColumnFormatting
 
     public function columnFormats(): array {
         return [
-            'D' => NumberFormat::FORMAT_NUMBER,
+            'E' => NumberFormat::FORMAT_NUMBER,
         ];
     }
 }
