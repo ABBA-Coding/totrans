@@ -6,6 +6,7 @@ use App\Http\Controllers\CrudController;
 use App\Models\Application;
 use App\Models\Batch;
 use App\Models\State;
+use App\Services\BitrixService;
 use Illuminate\Http\Request;
 
 /**
@@ -54,9 +55,16 @@ class BatchController extends CrudController
         }
 
         if (count($otherIds) > 0) {
-            Application::whereIn('id', $otherIds)->update([
+            $applications = Application::whereIn('id', $otherIds);
+            $applications->update([
                 'batch_id' => $id
             ]);
+            $service = new BitrixService();
+            $applications->each(function($application) use ($service, $id) {
+                if($application->bitrix_id !== null){
+                    $service->assignBatch($application->bitrix_id, $id);
+                }
+            });
         }
 
         return redirect()->back()->with(['success'=>'Успешно сохранено']);

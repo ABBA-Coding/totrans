@@ -24,7 +24,7 @@ class Application extends Model
 
     protected $table = 'applications';
 
-    protected $fillable = ['user_id', 'application_number', 'price', 'point_a_id', 'point_b_id', 'delivery_type', 'type', 'weight', 'volume', 'mileage', 'seats_number', 'order_date', 'arrival_date', 'additional_id', 'batch_id', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'application_number', 'price', 'point_a_id', 'point_b_id', 'delivery_type', 'type', 'weight', 'volume', 'mileage', 'seats_number', 'order_date', 'arrival_date', 'additional_id', 'batch_id', 'status', 'created_at', 'updated_at', 'bitrix_id'];
 
     protected $with = ['batch'];
 

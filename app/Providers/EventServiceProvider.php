@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Application;
+use App\Models\Batch;
+use App\Models\Feedback;
+use App\Observers\BatchObserver;
+use App\Observers\FeedbackObserver;
+use App\Observers\UserObserver;
+use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,6 +34,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        User::observe(UserObserver::class);
+        Feedback::observe(FeedbackObserver::class);
+        Batch::observe(BatchObserver::class);
+
         parent::boot();
 
         //

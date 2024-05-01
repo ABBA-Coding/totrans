@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\District;
 use App\Models\Manager;
 use App\Models\Role;
+use App\Services\BitrixService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -13,6 +14,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @User
+ * @property int $id
+ */
 class User extends Authenticatable
 {
     use Notifiable;
