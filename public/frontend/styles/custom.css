@@ -157,3 +157,26 @@ input.validation-error {
     background-color: #ededed;
     border-radius: 16px;
 }
+
+
+.information-card__type,
+.information-card__value {
+    width: 33.3333%;
+}
+
+.information-card__type:nth-child(2),
+.information-card__value:nth-child(2) {
+    text-align: center;
+}
+
+.information-card__type:nth-child(3),
+.information-card__value:nth-child(3) {
+    text-align: right;
+}
+
+
+@media(max-width: 500px) {
+    .information-card__type {
+        font-size: 13px;
+    }
+}

@@ -48,10 +48,12 @@
         <div class="information-card__box">
             <div class="information-card__item">
                 <div class="information-card__type">{{ __('static.ID заказа') }}</div>
+                <div class="information-card__type">{{ __('static.Объём груза') }}</div>
                 <div class="information-card__type">{{ __('static.Местоположение груза') }}</div>
             </div>
             <div class="information-card__item">
                 <div class="information-card__value">#{{ $application->application_number }}</div>
+                <div class="information-card__value">{{ $application->volume }}</div>
                 <div class="information-card__value application-card__status">
                     {{ $application->batch->state->parent->{'title_'.$lang} }}
                 </div>

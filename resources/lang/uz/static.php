@@ -76,6 +76,7 @@ return [
     'Количество мест' => 'Joylar soni',
     'Километраж' => 'Kilometraj',
     'Вес груза' => 'Yuk og’irligi',
+    'Объём груза' => 'Yuk hajmi',
     'Размер груза' => 'Yuk o’lchami',
     'км' => 'km',
     'кг' => 'kg',

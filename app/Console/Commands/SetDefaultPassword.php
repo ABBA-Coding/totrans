@@ -43,6 +43,8 @@ class SetDefaultPassword extends Command
     {
         print_r('start...');
 
+        return 'success';
+
         $count = User::whereHas('role', function ($role) {
             $role->where('role', User::ROLE_CLIENT);
         })
