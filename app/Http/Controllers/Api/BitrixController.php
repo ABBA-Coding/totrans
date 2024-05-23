@@ -46,7 +46,11 @@ class BitrixController extends Controller
         $pointB = $this->cities[$deal['UF_CRM_1712659280']];
         $deliveryType = $this->deliveryTypes[$deal['UF_CRM_1712315079793']];
         $weight = $this->convertEmptyToNull($deal['UF_CRM_1709990572889']);
-        $application = new Application();
+        if(Application::where('bitrix_id', $deal['ID'])->exists()){
+            $application = Application::where('bitrix_id', $deal['ID'])->first();
+        }else{
+            $application = new Application();
+        }
         $application->application_number = $deal['ID'];
         $application->user_id = $user->id;
         $application->point_a_id = $pointA;
