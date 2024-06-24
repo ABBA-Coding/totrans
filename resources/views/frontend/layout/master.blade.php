@@ -237,15 +237,15 @@
     });
 
     // application card
-    $('.application-card').on('click', function (e) {
-        e.preventDefault();
-        let isOpened = $(this).hasClass('detail');
-
-        $('.application-card').removeClass('detail');
-        if (!isOpened) {
-            $(this).addClass('detail');
-        }
-    });
+    // $('.application-card').on('click', function (e) {
+    //     e.preventDefault();
+    //     let isOpened = $(this).hasClass('detail');
+    //
+    //     $('.application-card').removeClass('detail');
+    //     if (!isOpened) {
+    //         $(this).addClass('detail');
+    //     }
+    // });
 
     // signup success modal
     $('.modal-close').on('click', function () {

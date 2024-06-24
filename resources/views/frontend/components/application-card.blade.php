@@ -1,14 +1,14 @@
-<div class="application-card status_{{ $application->batch->status }}">
+<div class="application-card status_{{ $application->batch->status }}" style="cursor: auto">
     <div class="info-card">
         <div class="info-card__box">
+            <div class="info-card__num" style="margin-bottom: 10px">{{ $application->order_date }}</div>
             <div class="info-card__top">
                 <div class="info-card__grey">{{ __('static.ID заказа') }}</div>
                 <div class="info-card__grey">{{ __('static.Местоположение груза') }}</div>
             </div>
             <div class="info-card__top">
                 <div class="info-card__num">#{{ $application->application_number }}</div>
-                <div class="info-card__num">{{ $application->order_date }}</div>
-                <div class="info-card__num application-card__status">{{ $application->batch->state->parent->{'title_'.$lang} }}</div>
+                <div class="info-card__num application-card__status">{{ $application->batch->state->{'title_'.$lang} }}</div>
             </div>
         </div>
         <div class="info-card__box">
