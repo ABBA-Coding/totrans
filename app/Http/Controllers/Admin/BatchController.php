@@ -59,12 +59,12 @@ class BatchController extends CrudController
             $applications->update([
                 'batch_id' => $id
             ]);
-            $service = new BitrixService();
-            $applications->each(function($application) use ($service, $id) {
-                if($application->bitrix_id !== null){
-                    $service->assignBatch($application->bitrix_id, $id);
-                }
-            });
+//            $service = new BitrixService();
+//            $applications->each(function($application) use ($service, $id) {
+//                if($application->bitrix_id !== null){
+//                    $service->assignBatch($application->bitrix_id, $id);
+//                }
+//            });
         }
 
         return redirect()->back()->with(['success'=>'Успешно сохранено']);

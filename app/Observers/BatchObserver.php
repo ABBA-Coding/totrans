@@ -30,23 +30,23 @@ class BatchObserver
 
     public function __construct()
     {
-        $this->service = new BitrixService();
+//        $this->service = new BitrixService();
     }
 
     public function updated(Batch $batch)
     {
-        if($batch->wasChanged('status')) {
-            $applications = $batch->applications;
-            foreach ($applications as $application){
-                $this->service->updateDealStatus($application->bitrix_id, $this->status[$batch->status]);
-            }
-        }
-
-        if($batch->wasChanged('state_id')) {
-            $applications = $batch->applications;
-            foreach ($applications as $application){
-                $this->service->updateDealState($application->bitrix_id, $this->states[$batch->state_id]);
-            }
-        }
+//        if($batch->wasChanged('status')) {
+//            $applications = $batch->applications;
+//            foreach ($applications as $application){
+//                $this->service->updateDealStatus($application->bitrix_id, $this->status[$batch->status]);
+//            }
+//        }
+//
+//        if($batch->wasChanged('state_id')) {
+//            $applications = $batch->applications;
+//            foreach ($applications as $application){
+//                $this->service->updateDealState($application->bitrix_id, $this->states[$batch->state_id]);
+//            }
+//        }
     }
 }

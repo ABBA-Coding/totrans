@@ -84,7 +84,9 @@ class User extends Authenticatable
 
     public function setPhoneAttribute($value)
     {
-        $this->attributes['phone']  = preg_replace('/\D+/', null, $value);
+        if (!empty($value)) {
+            $this->attributes['phone']  = preg_replace('/\D+/', null, $value);
+        }
     }
 
     public function setBirthdayAttribute($value)

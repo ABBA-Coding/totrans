@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-Route::post('bitrix/hook', [BitrixController::class, 'hook']);
-Route::post('contact/hook', function (Request $request){
-   \Log::info('contact/hook', $request->all());
-});
+//Route::post('bitrix/hook', [BitrixController::class, 'hook']);
+//Route::post('contact/hook', function (Request $request){
+//   \Log::info('contact/hook', $request->all());
+//});

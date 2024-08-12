@@ -17,7 +17,8 @@
                                 </ul>
                             </div>
                             <div>
-                                <a href="{{ route('admin.clients.export') }}" target="_blank" class="btn btn-success">Скачать Excel</a>
+                                <a href="{{ route('admin.clients.export') }}" target="_blank" class="btn btn-success">Экспорт Excel</a>
+                                <a href="{{ route('admin.clients.import') }}" class="btn btn-success">Импорт Excel</a>
                                 <a href="{{ route('admin.clients.form') }}" class="btn btn-primary mr-0" onclick="updateUser(event, null)">Добавить</a>
                             </div>
                         </div>

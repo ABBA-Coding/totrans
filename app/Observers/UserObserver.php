@@ -9,7 +9,7 @@ class UserObserver
 {
     public function created(User $user): void
     {
-        $service = new BitrixService();
-        $service->createUser($user->id);
+        //$service = new BitrixService();
+        //$service->createUser($user->id);
     }
 }

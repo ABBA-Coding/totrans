@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Activity;
 use App\Models\District;
 use App\Models\Manager;
 use App\User;
@@ -18,13 +19,16 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
 {
 
     const COLUMN_NAME = 0;
-    const COLUMN_LOGIN = 1;
-    const COLUMN_PHONE = 2;
-    const COLUMN_REGION = 3;
-    const COLUMN_EMAIL = 4;
-    const COLUMN_COMPANY = 5;
-    const COLUMN_MANAGER_NAME = 6;
-    const COLUMN_REGISTRATION_DATE = 7;
+    const COLUMN_SURNAME = 1;
+    const COLUMN_LOGIN = 2;
+    const COLUMN_PASSWORD = 3;
+    const COLUMN_PHONE = 4;
+    const COLUMN_REGION = 5;
+    const COLUMN_EMAIL = 6;
+    const COLUMN_COMPANY = 7;
+    const COLUMN_ACTIVITY = 8;
+    const COLUMN_MANAGER_NAME = 9;
+    const COLUMN_BIRTHDAY = 10;
 
     public $startRowNumber = 1;
 
@@ -42,36 +46,31 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
 
     public function collection(Collection $rows): bool
     {
-//        User::whereHas('role', function ($q) {
-//            $q->where('role', User::ROLE_CLIENT);
-//        })->delete();
-
-        $regions = collect(District::all());
-        $managers = collect(Manager::all());
+        $regions = District::select('id', 'name_ru')->pluck('id', 'name_ru');
+        $managers = Manager::select('id', 'name_ru')->pluck('id', 'name_ru');
+        $activity = Activity::select('id', 'title_ru')->pluck('id', 'title_ru');
 
         $data = [];
 
         foreach ($rows as  $row) {
-            $district = $regions->where('name_ru', 'ilike', $row[self::COLUMN_REGION])->first();
-            $manager = $managers->where('name_ru', 'ilike', $row[self::COLUMN_MANAGER_NAME])->first();
-
             if (empty($row[0])) {
-                continue;
-            }
-
-            if (empty($row[1])) {
                 break;
             }
 
+            $password = !empty($row[self::COLUMN_PASSWORD]) ? $row[self::COLUMN_PASSWORD] : Str::random(8);
+            $login = !empty((string)$row[self::COLUMN_LOGIN]) ? (string)$row[self::COLUMN_LOGIN] : User::generateLogin();
+
             $data[] = [
                 "name" => $row[self::COLUMN_NAME],
-                'login' => (string)$row[self::COLUMN_LOGIN],
+                "surname" => $row[self::COLUMN_SURNAME],
+                'login' => $login,
+                'password' => bcrypt($password),
                 "phone_string" => $row[self::COLUMN_PHONE],
                 "email" => $row[self::COLUMN_EMAIL],
                 "company_name" => $row[self::COLUMN_COMPANY],
-                "district_id" => ($district instanceof District) ? $district->id : null,
-                "manager_id" => ($manager instanceof Manager) ? $manager->id : null,
-                'password' => bcrypt(Str::random(10)),
+                "district_id" => $regions[$row[self::COLUMN_REGION]] ?? null,
+                "manager_id" => $managers[$row[self::COLUMN_MANAGER_NAME]] ?? null,
+                "activity_id" => $activity[$row[self::COLUMN_ACTIVITY]] ?? null,
                 'created_at' => Carbon::now()
             ];
         }

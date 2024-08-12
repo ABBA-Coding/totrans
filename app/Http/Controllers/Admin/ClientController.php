@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Console\Commands\ImportClient;
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ClientImport;
 use App\Models\Activity;
 use App\Models\Application;
 use App\Models\District;
@@ -12,6 +14,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Modules\Filemanager\Entities\Files;
 
 class ClientController extends Controller
 {
@@ -145,5 +148,28 @@ class ClientController extends Controller
     public function export()
     {
         return Excel::download(new UsersExport(), 'Клиенты.xlsx');
+    }
+
+    public function import()
+    {
+        return view('admin.clients.import');
+    }
+
+    public function importPost(Request $request)
+    {
+        $request->validate([
+            'file_id' => 'required|integer'
+        ]);
+
+        $file = Files::findOrFail($request->get('file_id'));
+        $src = '/'.$file->folder.'/'.$file->file;
+
+        try {
+            Excel::import(new ClientImport(2), $src, 'static');
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors([$exception->getMessage()]);
+        }
+
+        return redirect()->route('admin.clients.index')->with(['success'=>'Успешно создано клиенты']);
     }
 }
