@@ -20,8 +20,8 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 
 class ApplicationImport implements ToCollection, WithMultipleSheets, WithLimit, WithStartRow
 {
-    const COLUMN_BATCH_NUMBER = 0;
-    const COLUMN_DELIVERY_TYPE = 1;
+    const COLUMN_DELIVERY_TYPE = 0;
+    const COLUMN_BATCH_NUMBER = 1;
     const COLUMN_POINT_A = 2;
     const COLUMN_POINT_B = 3;
     const COLUMN_ORDER_DATE = 4;
