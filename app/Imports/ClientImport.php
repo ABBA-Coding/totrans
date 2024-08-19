@@ -66,6 +66,7 @@ class ClientImport implements ToCollection, WithMultipleSheets, WithLimit, WithS
                 'login' => $login,
                 'password' => bcrypt($password),
                 "phone_string" => $row[self::COLUMN_PHONE],
+                "phone" => $row[self::COLUMN_PHONE],
                 "email" => $row[self::COLUMN_EMAIL],
                 "company_name" => $row[self::COLUMN_COMPANY],
                 "district_id" => $regions[$row[self::COLUMN_REGION]] ?? null,

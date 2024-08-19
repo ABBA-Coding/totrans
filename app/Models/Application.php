@@ -120,4 +120,22 @@ class Application extends Model
                 return '-';
         }
     }
+
+    public static function getDeliveryType($delivery_label): string
+    {
+        switch ($delivery_label) {
+            case 'Авто':
+                return self::DELIVERY_TYPE_AUTO;
+            case 'Авиа':
+                return self::DELIVERY_TYPE_AIR;
+            case 'Железнодорожная':
+                return self::DELIVERY_TYPE_TRAIN;
+            case 'Морская':
+                return self::DELIVERY_TYPE_MARINE;
+            case 'Все':
+                return self::DELIVERY_TYPE_ALL;
+            default:
+                throw new \DomainException('Invalid delivery type');
+        }
+    }
 }

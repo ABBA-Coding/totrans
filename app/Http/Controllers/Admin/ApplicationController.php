@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\CrudController;
+use App\Imports\ApplicationImport;
 use App\Models\Activity;
 use App\Models\Application;
 use App\Models\Batch;
@@ -11,7 +12,10 @@ use App\Models\State;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use Modules\Filemanager\Entities\Files;
 
 /**
  * @group Application
@@ -72,5 +76,31 @@ class ApplicationController extends CrudController
         $model->update($request->all());
 
         return redirect()->back()->with(['success'=>'Успешно обновлено']);
+    }
+
+    public function import()
+    {
+        return view('admin.applications.import');
+    }
+
+    public function importPost(Request $request)
+    {
+        $request->validate([
+            'file_id' => 'required|integer'
+        ]);
+
+        $file = Files::findOrFail($request->get('file_id'));
+        $src = '/'.$file->folder.'/'.$file->file;
+
+        DB::beginTransaction();
+        try {
+            Excel::import(new ApplicationImport(2), $src, 'static');
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->withErrors([$exception->getMessage()]);
+        }
+
+        return redirect()->route('admin.applications.index')->with(['success'=>'Успешно импортирована заявки']);
     }
 }

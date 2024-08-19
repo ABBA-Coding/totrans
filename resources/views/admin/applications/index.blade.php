@@ -16,7 +16,10 @@
                                     <li class="breadcrumb-item"><a href="javascript:">Заказы</a></li>
                                 </ul>
                             </div>
-                            <a href="{{ route('admin.applications.create') }}" class="btn btn-primary mr-0">Добавить</a>
+                            <div>
+                                <a href="{{ route('admin.applications.import') }}" class="btn btn-success">Импорт Excel</a>
+                                <a href="{{ route('admin.applications.create') }}" class="btn btn-primary mr-0">Добавить</a>
+                            </div>
                         </div>
                     </div>
                 </div>

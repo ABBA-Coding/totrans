@@ -274,8 +274,11 @@ Route::prefix('admin/applications')->namespace('Admin')->group(function () {
         Route::get('/create', 'ApplicationController@create')->name('admin.applications.create');
         Route::post('/', 'ApplicationController@store')->name('admin.applications.store');
         Route::get('/{id}/edit', 'ApplicationController@edit')->name('admin.applications.edit');
-        Route::post('/{id}', 'ApplicationController@update')->name('admin.applications.update');
+        Route::post('/{id}', 'ApplicationController@update')->name('admin.applications.update')->where('id', '[0-9]+');
         Route::delete('/{id}', 'ApplicationController@destroy')->name('admin.applications.destroy');
+
+        Route::get('/import', 'ApplicationController@import')->name('admin.applications.import');
+        Route::post('/import', 'ApplicationController@importPost')->name('admin.applications.import-post');
     });
 });
 /*--------------------------------------------------------------------------------
